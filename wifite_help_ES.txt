@@ -1,0 +1,62 @@
+# sudo wifite --help
+
+   .               .    
+ .´  ·  .     .  ·  `.  wifite2 2.7.0
+ :  :  :  (¯)  :  :  :  un auditor de redes inalámbricas por derv82
+ `.  ·  ` /¯\ ´  ·  .´  mantenido por kimocoder
+   `     /¯¯¯\     ´    https://github.com/kimocoder/wifite2
+
+opciones:
+  -h, --help                                 muestra este mensaje de ayuda y sale
+
+CONFIGURACIONES:
+  -v, --verbose                                Muestra más opciones (-h -v). Imprime comandos y salidas. (predeterminado:
+                                               silencioso)
+  -i [interfaz]                                Interfaz inalámbrica a usar, por ejemplo, wlan0mon (predeterminado: pedir)
+  -c [canal]                                   Canal inalámbrico a escanear, por ejemplo, 1,3-6 (predeterminado: todos los canales de 2Ghz)
+  -inf, --infinite                             Habilita el modo de ataque infinito. Modifica el tiempo de escaneo con -p (predeterminado:
+                                               desactivado)
+  -mac, --random-mac                           Aleatoriza la dirección MAC de la tarjeta inalámbrica (predeterminado: desactivado)
+  -p [tiempo_escaneo]                          Pillage: Ataca todos los objetivos después del tiempo_escaneo (segundos)
+  --kill                                       Mata procesos que conflicten con Airmon/Airodump (predeterminado: desactivado)
+  -pow [min_potencia], --power [min_potencia]  Ataca cualquier objetivo con al menos min_potencia de señal
+  --skip-crack                                 Omite el desciframiento de handshakes/pmkid capturados (predeterminado: desactivado)
+  -first [ataque_max], --first [ataque_max]    Ataca los primeros ataque_max objetivos
+  -ic, --ignore-cracked                        Oculta objetivos previamente descifrados. (predeterminado: desactivado)
+  --clients-only                               Muestra solo objetivos que tengan clientes asociados (predeterminado: desactivado)
+  --nodeauths                                  Modo pasivo: Nunca desautentica clientes (predeterminado: desautenticar objetivos)
+  --daemon                                     Vuelve a poner el dispositivo en modo gestionado después de salir (predeterminado: desactivado)
+
+WEP:
+  --wep                                        Muestra solo redes encriptadas con WEP
+  --require-fakeauth                           Falla ataques si la autenticación falsa falla (predeterminado: desactivado)
+  --keep-ivs                                   Retiene archivos .IVS y los reutiliza al descifrar (predeterminado: desactivado)
+
+WPA:
+  --wpa                                        Muestra solo redes encriptadas con WPA (incluye WPS)
+  --new-hs                                     Captura nuevos handshakes, ignora handshakes existentes en hs (predeterminado:
+                                               desactivado)
+  --dict [archivo]                             Archivo que contiene contraseñas para desciframiento (predeterminado: /usr/share/dict/wordlist-
+                                               probable.txt)                                                                                  
+
+WPS:
+  --wps                                        Muestra solo redes habilitadas para WPS
+  --wps-only                                   Usa solo ataques WPS PIN & Pixie-Dust (predeterminado:
+                                               desactivado)
+  --bully                                      Usa el programa bully para ataques WPS PIN & Pixie-Dust (predeterminado:
+                                               reaver)
+  --reaver                                     Usa el programa reaver para ataques WPS PIN & Pixie-Dust (predeterminado:
+                                               reaver)
+  --ignore-locks                               No detiene el ataque WPS PIN si el AP se bloquea (predeterminado:
+                                               detener)
+
+PMKID:
+  --pmkid                                      Usa solo captura PMKID, evita otros ataques WPS & WPA (predeterminado:
+                                               desactivado)
+  --no-pmkid                                   No usa captura PMKID (predeterminado: desactivado)
+  --pmkid-timeout [seg]                        Tiempo de espera para captura PMKID (predeterminado: 300 segundos)
+
+COMANDOS:
+  --cracked                                    Imprime puntos de acceso previamente descifrados
+  --check [archivo]                            Verifica un archivo .cap (o todos los archivos hs/*.cap) en busca de handshakes WPA
+  --crack                                      Muestra comandos para descifrar un handshake capturado
