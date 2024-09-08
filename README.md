@@ -1,79 +1,65 @@
-﻿⚠️ Estado del Proyecto: Descontinuado ⚠️
+﻿![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/blob/main/Imagenes/ADM_MANAGER_ULTIMATE.png)
 
-Este proyecto ha sido descontinuado y ya no recibirá actualizaciones o soporte adicional. Aunque puedes seguir utilizando el código disponible, recomendamos explorar otras alternativas activas y actualizadas para manejar tus servidores o VPS.
-
-* NEW-ULTIMATE NEW (Final Versión 818034) :octocat:
-* Fecha de Última Actualización: 30/01/2022 
-
-💡 Nota: Si tienes alguna pregunta o necesitas ayuda, te sugerimos revisar los foros comunitarios o consultar otros repositorios en GitHub que ofrezcan herramientas similares.
-
-![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/blob/main/Imagenes/ADM_MANAGER_ULTIMATE.png)
-
-# ADM MANAGER ULTIMATE
+# WIFITE UTILITY :octocat: 
 ## :information_source: Descripción
-Es un script que ofrece un conjunto de características y herramientas diseñadas para 
-proporcionar una extrema facilidad de uso en servidores Linux con un enfoque en el uso de 
-VPN. Viene con una interfaz amigable que proporciona información detallada sobre el servidor y 
-sus usuarios.
+Wifite Utility es un script de Bash diseñado para facilitar la utilización de 
+herramientas de ataque y auditoría Wi-Fi. Este script automatiza y organiza la 
+ejecución de comandos relacionados con Wifite y herramientas complementarias, 
+simplificando el proceso de auditoría de redes inalámbricas.
 
 ## :computer: Instalación
 ```bash
-apt-get update -y
-apt-get full-upgrade -y
-wget --no-check-certificate https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/main/instala.sh
-chmod +x instala.sh*
-./instala.sh*
+cd /opt
+sudo rm -rf Wifite-Utility
+sudo git clone https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility.git
+sudo chmod +x Wifite-Utility/*
+cd Wifite-Utility
+ls -lthas
+```
+
+## :key: Acceso Directo
+```bash
+cd
+echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > wifiteutility
+sudo chmod +x wifiteutility
+sudo mv wifiteutility /usr/local/bin/
+cd
 ```
 
 ## :computer: Instalación en una Línea
 ```bash
-apt-get update -y; apt-get full-upgrade -y; wget --no-check-certificate https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/main/instala.sh; chmod +x instala.sh* && ./instala.sh*
+wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
 ```
-
-:memo: Las dependencias faltantes se instalarán automáticamente durante el proceso.
 
 ## :rocket: Modo de Uso
 
-Ejecute el script simplemente escribiendo `adm` o `menu` en tu terminal y presionando Enter.
+Ejecute el script simplemente ejecuta el siguiente comando `wifite-utility`  en tu terminal y presiona Enter.
 
 ```bash
-adm
-```
-```bash
-menu
+wifite-utility
 ```
 
 ## :bookmark_tabs: Notas
-NEW-ULTIMATE NEW ofrece las siguientes características:
+Este script permite ejecutar varios comandos útiles para auditorías Wi-Fi, incluyendo:
 
-- Conexiones SSH: Configura y administra conexiones SSH.
-- Conexiones VPN: Administra conexiones Dropbear, SSLTunnel4, OpenVPN, entre otras.
-- Gestión de Usuarios: Crea y elimina usuarios.
-- Monitoreo de Conexiones: Observa el estado y la actividad de las conexiones en línea.
-- Detalles del Sistema y Usuarios: Proporciona información detallada sobre el sistema y los usuarios.
-- Herramientas de Escaneo y Búsqueda: Accede a herramientas de análisis de seguridad.
-- Optimización del Sistema: Realiza tareas de optimización y limpieza del sistema.
+- Iniciar Wifite: Comando para comenzar la captura de handshakes y ataques de deautenticación.
+- Ver Estado de Interfaces: Comando para listar interfaces Wi-Fi y su estado.
+- Actualizar Herramientas: Comando para actualizar Wifite y herramientas relacionadas.
 
 ## :star2: Características 
 
-- Automatización: Simplifica la configuración y administración de servidores.
-- Eficiencia: Ahorra tiempo con una interfaz intuitiva y comandos simplificados.
-- Organización: Facilita la gestión estructurada del servidor y sus servicios.
+- Automatización: Ejecuta comandos de forma automatizada para simplificar las auditorías Wi-Fi.
+- Organización: Agrupa funcionalidades relacionadas para un acceso rápido y eficiente.
+- Actualización: Incluye funciones para mantener las herramientas actualizadas.
 
 ## :hammer_and_wrench: Requisitos 
 
-- Sistema Operativo: Linux (Ubuntu o Debian)
-- Versiones Recomendadas: Ubuntu 16.04 Server x86_64 / Debian 9 Server x86_64
-- Distribución: Se sugiere utilizar una distribución reciente o recién formateada.
-- Idioma Predeterminado: Portugués
+- Sistema Operativo: Linux/Unix
+- Dependencias: Bash, Wifite, y otras herramientas de auditoría Wi-Fi.
 
-## :file_folder: Proyectos útiles 
+## :memo:  Personalización
 
-- Generador de Key ADM-Ultimate New: [Ver Repositorio](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/tree/master/Install/Generador)
-
-## :inbox_tray: Descarga del Código Fuente
-
-- Código Fuente: [Descargar](https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-MANAGER-ALPHA/master/Install/Source-Code-ADM-Manager.zip)
+Puedes ajustar los comandos y configuraciones del script según tus necesidades modificando el archivo `/opt/Wifite-Utility/wifite-utility.sh`
 
 ## :open_file_folder: Estructura del Repositorio
 
@@ -88,8 +74,8 @@ NEW-ULTIMATE NEW ofrece las siguientes características:
 | :page_facing_up: | versao         | Archivo de versión del proyecto           |
 
 ## :email: Contacto 
-* :busts_in_silhouette: **@E8th4ver**: [Telegram](https://t.me/E8th4ver) - Desarrollador  ADM-Manager Ultimate
-* :busts_in_silhouette: **illuminati Dev Team**: [Grupo](https://t.me/AAAAAEXQOSyIpN2JZ0ehUQ) - Actualización de versión
-* :busts_in_silhouette: **Jony Rivera**: [Grupo](https://t.me/Jony_Rivera) - Colaborador
+* :busts_in_silhouette: **derv82**: [GitHub](https://github.com/derv82/wifite) - Desarrollador  Wifite
+* :busts_in_silhouette: **kimocoder**: [GitHub](https://github.com/kimocoder/wifite2) - Actualización de versión Wifite
+* :busts_in_silhouette: **Jony Rivera**: [GitHub](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility) - Colaborador
 
 ☆ https://t.me/AAAAAEXQOSyIpN2JZ0ehUQ [  ⃘⃤꙰✰ ] ☆
