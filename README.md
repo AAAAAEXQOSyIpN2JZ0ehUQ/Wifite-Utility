@@ -63,15 +63,15 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 
 ## :open_file_folder: Estructura del Repositorio
 
-| Icono            | Nombre         | Descripción                               |
-|------------------|----------------|-------------------------------------------|
-| :file_folder:    | Imagenes       | Carpeta para imágenes                     |
-| :file_folder:    | Install        | Carpeta para scripts de instalación       |
-| :file_folder:    | Modulos        | Carpeta para módulos adicionales          |
-| :page_facing_up: | .gitattributes | Archivo para configuración de Git         |
-| :book:           | README.md      | Archivo de documentación principal        |
-| :package:        | instala.sh     | Instalador en Bash                        |
-| :page_facing_up: | versao         | Archivo de versión del proyecto           |
+| Icono            | Nombre              | Descripción                               |
+|------------------|---------------------|-------------------------------------------|
+| :file_folder:    | imágenes            | Carpeta para imágenes                     |
+| :page_facing_up: | .gitattributes      | Archivo para configuración de Git         |
+| :page_facing_up: | LICENSE             | Archivo de licencia                       |
+| :book:           | README.md           | Archivo de documentación principal        |
+| :page_facing_up: | Wifite-Utility.sh   | Script principal de utilidad Wifite       |
+| :package:        | install.sh          | Script de instalación                     |
+| :page_facing_up: | wifite_help_ES.txt  | Archivo de ayuda en español para Wifite   |
 
 ## :email: Contacto 
 * :busts_in_silhouette: **derv82**: [GitHub](https://github.com/derv82/wifite) - Desarrollador  Wifite
