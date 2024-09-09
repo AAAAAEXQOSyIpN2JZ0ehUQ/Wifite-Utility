@@ -57,7 +57,7 @@ Este script permite ejecutar varios comandos útiles para auditorías Wi-Fi, inc
 - Sistema Operativo: Linux/Unix
 - Dependencias: Bash, Wifite, y otras herramientas de auditoría Wi-Fi.
 
-## :memo:  Personalización
+## :memo: Personalización
 
 Puedes ajustar los comandos y configuraciones del script según tus necesidades modificando el archivo `/opt/Wifite-Utility/wifite-utility.sh`
 
