@@ -63,7 +63,7 @@ fun_banner () {
   # Mostrar segundo banner
   clear
   echo -e "\n${green}   .               .    "
-  echo -e " ${green}.´  ·  .     .  ·  \`.   ${green}wifite2 System${reset}"
+  echo -e " ${green}.´  ·  .     .  ·  \`.   ${green}wifite2 2.7.0${reset}"
   echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
   echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
   echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
@@ -319,7 +319,7 @@ case $x in
     ;;
   9)
     echo -e "\n${process} ${cyan}Ayuda (MNUAL DE USUARIO)...${reset}"
-    sudo wifite --help
+    sudo ./wifite_help_ES.sh
     echo -e "\nPara más información, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
