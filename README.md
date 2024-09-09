@@ -71,6 +71,7 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 | :book:           | README.md           | Archivo de documentación principal        |
 | :page_facing_up: | Wifite-Utility.sh   | Script principal de utilidad Wifite       |
 | :package:        | install.sh          | Script de instalación                     |
+| :page_facing_up: | wifite_help_ES.sh   | Archivo de ayuda en español para Wifite   |
 | :page_facing_up: | wifite_help_ES.txt  | Archivo de ayuda en español para Wifite   |
 
 ## :email: Contacto 
