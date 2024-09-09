@@ -33,10 +33,10 @@ wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/mai
 
 ## :rocket: Modo de Uso
 
-Ejecute el script simplemente ejecuta el siguiente comando `wifite-utility`  en tu terminal y presiona Enter.
+Ejecute el script simplemente ejecuta el siguiente comando `wifiteutility`  en tu terminal y presiona Enter.
 
 ```bash
-wifite-utility
+wifiteutility
 ```
 
 ## :bookmark_tabs: Notas
