@@ -339,7 +339,7 @@ case $x in
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   13)
-    echo -e "\n${process} ${cyan}Actualizando Script...${reset}"
+    echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
     wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
