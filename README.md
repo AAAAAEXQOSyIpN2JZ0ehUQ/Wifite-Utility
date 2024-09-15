@@ -2,10 +2,16 @@
 
 # WIFITE UTILITY :octocat: 
 ## :information_source: Descripción
-Wifite Utility es un script de Bash diseñado para facilitar la utilización de 
-herramientas de ataque y auditoría Wi-Fi. Este script automatiza y organiza la 
-ejecución de comandos relacionados con Wifite y herramientas complementarias, 
-simplificando el proceso de auditoría de redes inalámbricas.
+El script Wifite Utility es una herramienta todo-en-uno diseñada para auditar 
+redes inalámbricas mediante el uso de Wifite y otras herramientas esenciales para 
+la auditoría de redes Wi-Fi. Esta utilidad automatiza gran parte del proceso de 
+instalación de herramientas y drivers necesarios para realizar ataques de redes, 
+facilitando el trabajo a pentesters y entusiastas de la seguridad.
+
+Este script proporciona una interfaz gráfica de menú (GUI) amigable para ejecutar 
+las funciones más comunes, como la instalación de Wifite, la creación de 
+diccionarios personalizados, la instalación de herramientas adicionales, y la 
+configuración de drivers específicos para adaptadores de red.
 
 ## :computer: Instalación
 ```bash
@@ -42,15 +48,36 @@ wifiteutility
 ## :bookmark_tabs: Notas
 Este script permite ejecutar varios comandos útiles para auditorías Wi-Fi, incluyendo:
 
-- Iniciar Wifite: Comando para comenzar la captura de handshakes y ataques de deautenticación.
-- Ver Estado de Interfaces: Comando para listar interfaces Wi-Fi y su estado.
-- Actualizar Herramientas: Comando para actualizar Wifite y herramientas relacionadas.
+- Instalar/Actualizar Wifite: El script se encarga de instalar o actualizar la última versión de Wifite, garantizando siempre el acceso a una de las herramientas más potentes para auditorías inalámbricas.
+- Crear Diccionario Personalizado: El script permite generar un diccionario a partir de múltiples listas de palabras, optimizando su uso para ataques de fuerza bruta en auditorías.
+- Instalar Herramientas Esenciales: El script gestiona la instalación de herramientas complementarias, como hcxdumptool, libpcap, y otras esenciales para auditorías Wi-Fi.
+- Instalar Drivers Wi-Fi: El script facilita la instalación de drivers para adaptadores Wi-Fi, como rtl8814au, rtl88xxau, asegurando la compatibilidad con auditorías.
+- Automatización Total: El script automatiza todo el proceso de instalación, eliminando la necesidad de realizar configuraciones manuales.
+- Modularidad: El script te permite seleccionar qué herramientas deseas instalar, adaptándose a tus necesidades específicas.
+- Soporte Extensivo de Drivers: El script garantiza la compatibilidad con una amplia gama de adaptadores Wi-Fi frecuentemente utilizados en pentesting.
+- Instalar Pyrit: Instala o actualiza Pyrit para realizar ataques a redes inalámbricas utilizando la aceleración por GPU.
 
 ## :star2: Características 
 
-- Automatización: Ejecuta comandos de forma automatizada para simplificar las auditorías Wi-Fi.
-- Organización: Agrupa funcionalidades relacionadas para un acceso rápido y eficiente.
-- Actualización: Incluye funciones para mantener las herramientas actualizadas.
+- **Instalación simplificada de Wifite y herramientas esenciales**:
+  - Actualiza o instala Wifite fácilmente con solo un par de clics.
+  - Instalación de herramientas complementarias como hcxdumptool, hcxtools, libpcap, entre otras.
+
+- **Creación automática de diccionarios personalizados**:
+  - Combina varias listas de palabras preexistentes y genera un diccionario optimizado para pruebas de penetración.
+  - Filtra palabras de longitud mínima para mayor efectividad en ataques de fuerza bruta.
+
+- **Gestión de drivers de adaptadores Wi-Fi**:
+  - Permite la instalación rápida de drivers para adaptadores como rtl8188eus, rtl8814au, rtl88xxau, entre otros.
+  - Facilita la instalación de headers y otros módulos del kernel necesarios para la compilación de drivers.
+
+- **Interfaz gráfica amigable**:
+  - Incluye una GUI simple que facilita la navegación por las distintas opciones del script.
+  - Banner personalizado que muestra información relevante sobre las herramientas utilizadas.
+
+- **Personalización y mantenimiento de Pyrit**:
+  - Instala o actualiza Pyrit, una potente herramienta para ataques a redes inalámbricas con GPU.
+  - Incluye comandos de instalación y compilación de Pyrit directamente desde el código fuente.
 
 ## :hammer_and_wrench: Requisitos 
 
