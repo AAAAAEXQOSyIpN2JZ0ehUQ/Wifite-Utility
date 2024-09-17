@@ -152,6 +152,24 @@ instalar_wifite_y_herramientas() {
     fi
 }
 
+data_system () {
+    # Mostrar la configuración de red usando ifconfig
+    echo -e "\n${info} Mostrando información de red con ifconfig...${reset}\n"
+    ifconfig
+
+    # Mostrar información sobre interfaces inalámbricas utilizando iwconfig
+    echo -e "\n${info} Mostrando información de interfaces inalámbricas con iwconfig...${reset}\n"
+    iwconfig
+
+    # Mostrar la lista de dispositivos USB conectados usando lsusb
+    echo -e "\n${info} Mostrando dispositivos USB conectados con lsusb...${reset}\n"
+    lsusb
+
+    # Mostrar información detallada sobre las capacidades inalámbricas del sistema usando iw list
+    echo -e "\n${info} Mostrando capacidades inalámbricas con iw list...${reset}\n"
+    iw list | grep -A 10 "Supported interface modes:" | grep "*"
+}
+
 # Función para instalar drivers
 instalar_drivers () {
     while true; do
@@ -265,8 +283,10 @@ echo -e "${green}9 ${white}Ayuda (Manual de usario)${reset}"
 echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
 echo -e "${green}11 ${white}Crear Diccionario de Defecto${reset}"
 echo -e "${green}12 ${white}Instalar Drivers${reset}"
+echo -e "${green}13 ${white}Información del Sistema y Red${reset}"
+
 echo -e "${bar}"
-echo -e "${green}13 $versionSCT${reset}"
+echo -e "${green}14 $versionSCT${reset}"
 echo -e "${bar}"
 echo -e "${green}0 ${white}Salir${reset}"
 echo -e "\n${barra}"
@@ -337,9 +357,14 @@ case $x in
     instalar_drivers
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
-  13)
+  13) 
+    echo -e "\n${process} ${cyan}Información del Sistema y Red...${reset}"
+    data_system 
+    echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÚ!${reset}"; read
+    ;;
+  14)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
-    wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+    sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   0)
