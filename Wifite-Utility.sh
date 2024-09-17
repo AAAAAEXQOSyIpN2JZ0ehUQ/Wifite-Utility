@@ -295,7 +295,7 @@ echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 case $x in
   1)
     echo -e "\n${process} ${cyan}Ejecutando Wifite (PORDEFECTO)${reset}"
-    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --daemon
+    sudo wifite --ignore-locks --keep-ivs --random-mac -v --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   2)
