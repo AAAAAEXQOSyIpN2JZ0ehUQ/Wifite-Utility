@@ -1,11 +1,10 @@
 #!/bin/bash
 #====================================================
-#   SCRIPT:                   WIFITE UTILITY
-#   DESARROLLADO POR:         JONY RIVERA 
-#   FECHA DE ACTUALIZACIÃ“N:  08-009-2024 
-#   CONTACTO POR TELEGRAMA:   https://t.me/Jony_Rivera
+#   SCRIPT:                   Wifite Utility
+#   DESARROLLADO POR:         JONY RIVERA (Dzhoni_dev)
+#   FECHA DE ACTUALIZACIÃ“N:  08-09-2024 
+#   CONTACTO POR TELEGRAMA:   https://t.me/Dzhoni_dev
 #   GITHUB OFICIAL:           https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility
-
 #====================================================
 x="ok"
 
@@ -67,7 +66,7 @@ fun_banner () {
   echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
   echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
   echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
-  echo -e " \n${green}GUI Version coded by: Jony Rivera ${reset}"
+  echo -e " \n${green}GUI Version coded by: Dzhoni_dev ${reset}"
 }
 
 # Función para crear el diccionario
