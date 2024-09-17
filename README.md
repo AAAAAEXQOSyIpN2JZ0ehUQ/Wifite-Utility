@@ -1,6 +1,6 @@
 ﻿![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/blob/main/Imagenes/Wifite-Utility.png)
 
-# WIFITE UTILITY :octocat: 
+# Wifite Utility :octocat: 
 ## :information_source: Descripción
 El script Wifite Utility es una herramienta todo-en-uno diseñada para auditar 
 redes inalámbricas mediante el uso de Wifite y otras herramientas esenciales para 
