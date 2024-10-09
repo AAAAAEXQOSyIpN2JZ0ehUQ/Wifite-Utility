@@ -56,9 +56,27 @@ bar="${yellow}----------------------------------------------${reset}"
     exit 0
 }
 
-menu_gui () {
+# menú de interfaz de usuario
+user_interface_menu() {
 
-fun_banner () {
+services=("NetworkManager" "wpa_supplicant")
+
+# Función para detener los servicios
+stop_services() {
+    for service in "${services[@]}"; do
+        echo -e "\nDeteniendo el servicio: ${service}..."
+        sudo systemctl stop "$service"
+
+        # Verificar si el servicio se ha detenido correctamente
+        if [[ $? -eq 0 ]]; then
+            echo -e "${checkmark} ${white}$service ${green}detenido con éxito.${reset}"
+        else
+            echo -e "${error} ${white}No se pudo detener ${service}.${reset}"
+        fi
+    done
+}
+
+fun_banner() {
   # Mostrar segundo banner
   clear
   echo -e "\n${green}   .               .    "
@@ -129,7 +147,10 @@ instalar_wifite_y_herramientas() {
     read -p "$(echo -e "\n${green}¿Deseas instalar o actualizar las herramientas esenciales? (Y/n):${white} ")" instalar_herramientas 
     if [[ $instalar_herramientas =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Herramientas Esenciales.....${reset}\n"
-        sudo apt install -y git hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
+        # sudo apt install -y git hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
+        sudo apt install git hcxdumptool hcxtools python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
+        sudo pip3 install scapy numpy
+
     else
         echo -e "\n${info} Las herramientas esenciales no serán instaladas o actualizadas.${reset}\n"
     fi
@@ -143,16 +164,17 @@ instalar_wifite_y_herramientas() {
         sudo git clone https://github.com/JPaulMora/Pyrit.git
         sudo chmod +x Pyrit/*
         cd Pyrit
-        sudo python2.7 setup.py clean
-        sudo python2.7 setup.py build
-        sudo python2.7 setup.py install
+        sudo python3 setup.py clean
+        sudo python3 setup.py build
+        sudo python3 setup.py install
+        pyrit -h
         cd
     else
         echo -e "\n${info} Pyrit no será instalado o actualizado.${reset}\n"
     fi
 }
 
-data_system () {
+data_system() {
     # Mostrar la configuración de red usando ifconfig
     echo -e "\n${info} Mostrando información de red con ifconfig...${reset}\n"
     ifconfig
@@ -171,7 +193,7 @@ data_system () {
 }
 
 # Función para instalar drivers
-instalar_drivers () {
+instalar_drivers() {
     while true; do
 
       # Mostrar banner
@@ -284,7 +306,6 @@ echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
 echo -e "${green}11 ${white}Crear Diccionario de Defecto${reset}"
 echo -e "${green}12 ${white}Instalar Drivers${reset}"
 echo -e "${green}13 ${white}Información del Sistema y Red${reset}"
-
 echo -e "${bar}"
 echo -e "${green}14 $versionSCT${reset}"
 echo -e "${bar}"
@@ -295,34 +316,40 @@ echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 case $x in
   1)
     echo -e "\n${process} ${cyan}Ejecutando Wifite (PORDEFECTO)${reset}"
+    stop_services
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   2)
     echo -e "\n${process} ${cyan}Ejecutando ataques WPS...${reset}"
+    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   3)
     echo -e "\n${process} ${cyan}Capturando PMKID (WPA/WPA2)...${reset}"
     crear_diccionario
+    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --pmkid --wpa --dict /usr/share/wordlists/defaultWordList.txt --pmkid-timeout 60 --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   4)
     echo -e "\n${process} ${cyan}Ejecutando ataques WEP...${reset}"
+    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wep --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   5)
     echo -e "\n${process} ${cyan}Capturando handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
+    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wpa --dict /usr/share/wordlists/defaultWordList.txt --no-pmkid --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   6)
     echo -e "\n${process} ${cyan}Crackeando handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
+    stop_services
     sudo wifite --crack --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
@@ -369,6 +396,7 @@ case $x in
     ;;
   0)
     echo -e "\n${info} ${cyan}Saliendo...${reset}"
+    sudo systemctl restart NetworkManager
     exit 0
     ;;
   *)
@@ -377,6 +405,13 @@ case $x in
 esac
 done
 }
-menu_gui
+
+# Detener NetworkManager y wpa_supplicant para evitar conflictos
+# sudo systemctl stop NetworkManager
+# sudo systemctl stop wpa_supplicant
+# sudo systemctl restart NetworkManager
+
+# Ejecución del menú principal
+user_interface_menu
 
 # Fin del script
