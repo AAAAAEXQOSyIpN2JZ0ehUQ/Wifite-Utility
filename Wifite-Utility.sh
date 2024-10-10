@@ -1,8 +1,8 @@
 #!/bin/bash
 #====================================================
 #   SCRIPT:                   Wifite Utility
-#   DESARROLLADO POR:         JONY RIVERA (Dzhoni_dev)
-#   FECHA DE ACTUALIZACIÃ“N:  08-09-2024 
+#   DESARROLLADO POR:         JONY RIVERA (Dzhoni)
+#   FECHA DE ACTUALIZACIÓN:   08-09-2024 
 #   CONTACTO POR TELEGRAMA:   https://t.me/Dzhoni_dev
 #   GITHUB OFICIAL:           https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility
 #====================================================
@@ -58,6 +58,11 @@ bar="${yellow}----------------------------------------------${reset}"
 
 # menú de interfaz de usuario
 user_interface_menu() {
+
+# Detener NetworkManager y wpa_supplicant para evitar conflictos
+# sudo systemctl stop NetworkManager
+# sudo systemctl stop wpa_supplicant
+# sudo systemctl restart NetworkManager
 
 services=("NetworkManager" "wpa_supplicant")
 
@@ -391,6 +396,7 @@ case $x in
     ;;
   14)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
+    sudo systemctl restart NetworkManager
     sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
@@ -405,11 +411,6 @@ case $x in
 esac
 done
 }
-
-# Detener NetworkManager y wpa_supplicant para evitar conflictos
-# sudo systemctl stop NetworkManager
-# sudo systemctl stop wpa_supplicant
-# sudo systemctl restart NetworkManager
 
 # Ejecución del menú principal
 user_interface_menu
