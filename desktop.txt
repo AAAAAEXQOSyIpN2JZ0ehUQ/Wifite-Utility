@@ -1,0 +1,17 @@
+sudo nano /usr/share/applications/guiwifite.desktop 
+
+sudo nano ~/.local/share/applications/guiwifite.desktop
+
+[Desktop Entry] 
+Name=GUI wifite 
+Comment=Python script to automate wireless auditing using aircrack-ng tools
+Encoding=UTF-8
+Exec=/usr/share/kali-menu/exec-in-shell "wifiteutility"
+Icon=kali-wifite
+StartupNotify=false
+Terminal=true
+Type=Application
+Categories=06-wireless-attacks;
+X-Kali-Package=wifite
+
+sudo update-desktop-database 
