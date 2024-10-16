@@ -100,7 +100,7 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 | :package:        | install.sh          | Script de instalación                     |
 | :page_facing_up: | wifite_help_ES.sh   | Archivo de ayuda en español para Wifite   |
 | :page_facing_up: | wifite_help_ES.txt  | Archivo de ayuda en español para Wifite   |
-
+d
 ## :email: Contacto 
 * :busts_in_silhouette: **derv82**: [GitHub](https://github.com/derv82/wifite) - Desarrollador  Wifite
 * :busts_in_silhouette: **kimocoder**: [GitHub](https://github.com/kimocoder/wifite2) - Actualización de versión Wifite
