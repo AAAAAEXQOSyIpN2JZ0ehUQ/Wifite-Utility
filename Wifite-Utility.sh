@@ -390,6 +390,7 @@ case $x in
   14)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
     sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+    sudo rm -rf wget-log*
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   0)
