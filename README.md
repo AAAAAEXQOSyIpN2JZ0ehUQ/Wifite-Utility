@@ -20,7 +20,7 @@ sudo rm -rf Wifite-Utility
 sudo git clone https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility.git
 sudo chmod +x Wifite-Utility/*
 cd Wifite-Utility
-ls -lthas
+ls -ltha
 ```
 
 ## :key: Acceso Directo
