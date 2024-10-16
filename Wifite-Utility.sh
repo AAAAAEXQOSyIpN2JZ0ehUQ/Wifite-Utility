@@ -88,7 +88,7 @@ fun_banner() {
   echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
   echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
   echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
-  echo -e " \n${green}sVersion codificada por: Jony Rivera (Dzhoni) ${reset}"
+  echo -e " \n${green}GUI Version codificada por: Jony Rivera (Dzhoni) ${reset}"
 }
 
 # Función para crear el diccionario
