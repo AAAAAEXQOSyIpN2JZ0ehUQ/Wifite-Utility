@@ -77,7 +77,7 @@ stop_services() {
         else
             echo -e "${error} ${white}No se pudo detener ${service}.${reset}"
         fi
-    dones
+    done
 }
 
 fun_banner() {
