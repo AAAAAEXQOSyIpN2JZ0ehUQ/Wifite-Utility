@@ -1,7 +1,7 @@
 #!/bin/bash
 #====================================================
 #   SCRIPT:                   Wifite Utility
-#   DESARROLLADO POR:         JONY RIVERA (Dzhoni)
+#   DESARROLLADO POR:         Jony Rivera (Dzhoni)
 #   FECHA DE ACTUALIZACIÓN:   08-09-2024 
 #   CONTACTO POR TELEGRAMA:   https://t.me/Dzhoni_dev
 #   GITHUB OFICIAL:           https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility
@@ -64,10 +64,9 @@ user_interface_menu() {
 # sudo systemctl stop wpa_supplicant
 # sudo systemctl restart NetworkManager
 
-services=("NetworkManager" "wpa_supplicant")
-
 # Función para detener los servicios
 stop_services() {
+    services=("NetworkManager" "wpa_supplicant")
     for service in "${services[@]}"; do
         echo -e "\nDeteniendo el servicio: ${service}..."
         sudo systemctl stop "$service"
@@ -89,7 +88,7 @@ fun_banner() {
   echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
   echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
   echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
-  echo -e " \n${green}GUI Version coded by: Dzhoni_dev ${reset}"
+  echo -e " \n${green}sVersion codificada por: Jony Rivera (Dzhoni) ${reset}"
 }
 
 # Función para crear el diccionario
@@ -321,40 +320,34 @@ echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 case $x in
   1)
     echo -e "\n${process} ${cyan}Ejecutando Wifite (PORDEFECTO)${reset}"
-    stop_services
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   2)
     echo -e "\n${process} ${cyan}Ejecutando ataques WPS...${reset}"
-    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   3)
     echo -e "\n${process} ${cyan}Capturando PMKID (WPA/WPA2)...${reset}"
     crear_diccionario
-    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --pmkid --wpa --dict /usr/share/wordlists/defaultWordList.txt --pmkid-timeout 60 --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   4)
     echo -e "\n${process} ${cyan}Ejecutando ataques WEP...${reset}"
-    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wep --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   5)
     echo -e "\n${process} ${cyan}Capturando handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
-    stop_services
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wpa --dict /usr/share/wordlists/defaultWordList.txt --no-pmkid --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   6)
     echo -e "\n${process} ${cyan}Crackeando handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
-    stop_services
     sudo wifite --crack --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
@@ -396,13 +389,11 @@ case $x in
     ;;
   14)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
-    sudo systemctl restart NetworkManager
     sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   0)
     echo -e "\n${info} ${cyan}Saliendo...${reset}"
-    sudo systemctl restart NetworkManager
     exit 0
     ;;
   *)
