@@ -59,13 +59,38 @@ bar="${yellow}----------------------------------------------${reset}"
 # menú de interfaz de usuario
 user_interface_menu() {
 
-# Detener NetworkManager y wpa_supplicant para evitar conflictos
-# sudo systemctl stop NetworkManager
-# sudo systemctl stop wpa_supplicant
-# sudo systemctl restart NetworkManager
+fun_banner() {
+  # Mostrar segundo banner
+  clear
+  echo -e "\n${green}   .               .    "
+  echo -e " ${green}.´  ·  .     .  ·  \`.   ${green}wifite2 2.7.0${reset}"
+  echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
+  echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
+  echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
+  echo -e " \n${green}GUI Version codificada por: Jony Rivera (Dzhoni) ${reset}"
+}
+
+# Función de actualización
+P_SERVER="https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/Install/"
+v1=$(curl -sSL "${P_SERVER}/versionact")
+v2=$(cat /opt/Wifite-Utility/Install/versionact)
+
+txt01="Tu versión está actualizada"
+txt02="¡Hay una actualización disponible!"
+
+# Compara las versiones y define el mensaje
+if [[ $v1 = $v2 ]]; then
+    versionSCT="${green}${txt01} ${cyan}$v2${reset}"
+else
+    versionSCT="${red}${txt02} ${cyan}$v1${reset}"
+fi
 
 # Función para detener los servicios
 stop_services() {
+    # Detener NetworkManager y wpa_supplicant para evitar conflictos
+    # sudo systemctl stop NetworkManager
+    # sudo systemctl stop wpa_supplicant
+    # sudo systemctl restart NetworkManager
     services=("NetworkManager" "wpa_supplicant")
     for service in "${services[@]}"; do
         echo -e "\nDeteniendo el servicio: ${service}..."
@@ -78,17 +103,6 @@ stop_services() {
             echo -e "${error} ${white}No se pudo detener ${service}.${reset}"
         fi
     done
-}
-
-fun_banner() {
-  # Mostrar segundo banner
-  clear
-  echo -e "\n${green}   .               .    "
-  echo -e " ${green}.´  ·  .     .  ·  \`.   ${green}wifite2 2.7.0${reset}"
-  echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
-  echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
-  echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
-  echo -e " \n${green}GUI Version codificada por: Jony Rivera (Dzhoni) ${reset}"
 }
 
 # Función para crear el diccionario
@@ -152,7 +166,7 @@ instalar_wifite_y_herramientas() {
     if [[ $instalar_herramientas =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Herramientas Esenciales.....${reset}\n"
         # sudo apt install -y git hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
-        sudo apt install git hcxdumptool hcxtools python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
+        sudo apt install git hcxdumptool hcxtools python2.7-dev python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
         sudo pip3 install scapy numpy
 
     else
@@ -204,14 +218,16 @@ instalar_drivers() {
       fun_banner
 
         echo -e "\n${cyan}Selecciona el driver que deseas instalar:${reset}\n"
-        echo -e "${green}1 ${white}Instalar build-essential, dkms y headers${reset}"
-        echo -e "${green}2 ${white}Instalar realtek-rtl8188eus-dkms${reset}"
-        echo -e "${green}3 ${white}Instalar realtek-rtl8814au-dkms${reset}"
-        echo -e "${green}4 ${white}Instalar realtek-rtl8723cs-dkms${reset}"
-        echo -e "${green}5 ${white}Instalar realtek-rtl88xxau-dkms${reset}"
-        echo -e "${green}6 ${white}Instalar realtek-rtl8188fu-dkms${reset}"
+        echo -e "${green}1  ${white}Instalar build-essential, dkms y headers${reset}"
+        echo -e "${green}2  ${white}Instalar realtek-rtl8188eus-dkms${reset}"
+        echo -e "${green}3  ${white}Instalar realtek-rtl8814au-dkms${reset}"
+        echo -e "${green}4  ${white}Instalar realtek-rtl8723cs-dkms${reset}"
+        echo -e "${green}5  ${white}Instalar realtek-rtl88xxau-dkms${reset}"
+        echo -e "${green}6  ${white}Instalar realtek-rtl8188fu-dkms${reset}"
         echo -e "${bar}"
-        echo -e "${green}0 ${white}Volver al menú principal${reset}"
+        echo -e "${green}7 $versionSCT${reset}"
+        echo -e "${bar}"
+        echo -e "${green}0  ${white}Volver al menú principal${reset}"
         echo -e "\n${barra}"
         echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
 
@@ -260,6 +276,12 @@ instalar_drivers() {
                 echo -e "\n${info} Instalación completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
+            7)
+                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
+                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+                sudo rm -rf wget-log*
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
             0)
                 return
                 ;;
@@ -277,35 +299,20 @@ do
 # Mostrar banner
 fun_banner
 
-# Función de actualización
-P_SERVER="https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/Install/"
-v1=$(curl -sSL "${P_SERVER}/versionact")
-v2=$(cat /opt/Wifite-Utility/Install/versionact)
-
-txt01="Tu versión está actualizada"
-txt02="¡Hay una actualización disponible!"
-
-# Compara las versiones y define el mensaje
-if [[ $v1 = $v2 ]]; then
-    versionSCT="${green}${txt01} ${cyan}$v2${reset}"
-else
-    versionSCT="${red}${txt02} ${cyan}$v1${reset}"
-fi
-
 # Script para auditoría de redes Wi-Fi utilizando Wifite
 echo -e "\n${cyan}Selecciona el tipo de ataque:${reset}\n"
-echo -e "${green}1 ${white}Ejecutando Wifite (Por defecto)${reset}"
-echo -e "${green}2 ${white}Ataques WPS${reset}"
-echo -e "${green}3 ${white}Captura de PMKID (WPA/WPA2)${reset}"
-echo -e "${green}4 ${white}Ataques WEP${reset}"
-echo -e "${green}5 ${white}Captura de Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}1  ${white}Ejecutando Wifite (Por defecto)${reset}"
+echo -e "${green}2  ${white}Ataques WPS${reset}"
+echo -e "${green}3  ${white}Captura de PMKID (WPA/WPA2)${reset}"
+echo -e "${green}4  ${white}Ataques WEP${reset}"
+echo -e "${green}5  ${white}Captura de Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}6 ${white}Crackeo de Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}6  ${white}Crackeo de Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}7 ${indicator} Verificación de Handshakes Existentes${reset}"
-echo -e "${green}8 ${indicator} Verificación de Handshakes Crackeados${reset}"
+echo -e "${green}7  ${indicator} Verificación de Handshakes Existentes${reset}"
+echo -e "${green}8  ${indicator} Verificación de Handshakes Crackeados${reset}"
 echo -e "${bar}"
-echo -e "${green}9 ${white}Ayuda (Manual de usario)${reset}"
+echo -e "${green}9  ${white}Ayuda (Manual de usario)${reset}"
 echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
 echo -e "${green}11 ${white}Crear Diccionario de Defecto${reset}"
 echo -e "${green}12 ${white}Instalar Drivers${reset}"
@@ -313,7 +320,7 @@ echo -e "${green}13 ${white}Información del Sistema y Red${reset}"
 echo -e "${bar}"
 echo -e "${green}14 $versionSCT${reset}"
 echo -e "${bar}"
-echo -e "${green}0 ${white}Salir${reset}"
+echo -e "${green}0  ${white}Salir${reset}"
 echo -e "\n${barra}"
 echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 
