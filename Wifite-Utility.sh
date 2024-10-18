@@ -95,6 +95,7 @@ crear_diccionario() {
         echo -e "\n${info} Creando diccionario.....${reset}\n"
 
         # Descomprimir el archivo rockyou.txt.gz si aún no ha sido descomprimido
+        sudo apt install -y wordlists
         if [[ ! -f "/usr/share/wordlists/rockyou.txt" ]]; then
             sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
         fi
@@ -350,7 +351,7 @@ echo -e "${green}8  ${indicator} Verificación de Handshakes Crackeados${reset}"
 echo -e "${bar}"
 echo -e "${green}9  ${white}Ayuda (Manual de usario)${reset}"
 echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
-echo -e "${green}11 ${white}Crear Diccionario de Defecto${reset}"
+echo -e "${green}11 ${white}Crear Diccionario personalizado${reset}"
 echo -e "${green}12 ${white}Instalar Drivers${reset}"
 echo -e "${green}13 ${white}Gestionar servicios interferentes${reset}"
 echo -e "${green}14 ${white}Información del Sistema y Red${reset}"
@@ -417,7 +418,7 @@ case $x in
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   11)
-    echo -e "\n${process} ${cyan}Creando diccionario de defecto...${reset}"
+    echo -e "\n${process} ${cyan}Creando diccionario personalizado...${reset}"
     crear_diccionario
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
