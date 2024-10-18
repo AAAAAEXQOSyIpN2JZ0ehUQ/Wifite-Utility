@@ -92,14 +92,15 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 
 | Icono            | Nombre              | Descripción                               |
 |------------------|---------------------|-------------------------------------------|
-| :file_folder:    | imágenes            | Carpeta para imágenes                     |
+| :file_folder:    | Documentos          | Carpeta para documentos en general        |
+| :file_folder:    | Imágenes            | Carpeta para imágenes del proyecto        |
+| :file_folder:    | Install             | Carpeta para scripts de instalación       |
 | :page_facing_up: | .gitattributes      | Archivo para configuración de Git         |
-| :page_facing_up: | LICENSE             | Archivo de licencia                       |
+| :page_facing_up: | LICENSE             | Archivo de licencia del proyecto          |
 | :book:           | README.md           | Archivo de documentación principal        |
 | :page_facing_up: | Wifite-Utility.sh   | Script principal de utilidad Wifite       |
-| :package:        | install.sh          | Script de instalación                     |
+| :package:        | install.sh          | Script de instalación automatizada        |
 | :page_facing_up: | wifite_help_ES.sh   | Archivo de ayuda en español para Wifite   |
-| :page_facing_up: | wifite_help_ES.txt  | Archivo de ayuda en español para Wifite   |
 
 ## :email: Contacto 
 * :busts_in_silhouette: **derv82**: [GitHub](https://github.com/derv82/wifite) - Desarrollador  Wifite
