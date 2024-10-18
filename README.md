@@ -32,6 +32,13 @@ sudo mv wifiteutility /usr/local/bin/
 cd
 ```
 
+## :package: Paquete
+```bash
+sudo apt-get -y update
+sudo apt-get install -y wifite
+sudo apt install -y hcxdumptool hcxtools
+```
+
 ## :computer: Instalación en una Línea
 ```bash
 sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
