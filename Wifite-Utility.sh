@@ -293,6 +293,62 @@ instalar_drivers() {
     done
 }
 
+# Función para gestionar servicios y verificar el modo monitor
+gestionar_servicios_interferentes() {
+    while true; do
+
+        # Mostrar banner
+        fun_banner
+
+        echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
+        echo -e "${green}1  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
+        echo -e "${green}2  ${white}Reactivar servicios detenidos${reset}"
+        echo -e "${green}3  ${white}Verificar el estado del modo monitor${reset}"
+        echo -e "${bar}"
+        echo -e "${green}4 $versionSCT${reset}"
+        echo -e "${bar}"
+        echo -e "${green}0  ${white}Volver al menú principal${reset}"
+        echo -e "\n${barra}"
+        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
+
+        case $option in
+            1)
+                echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+                sudo systemctl stop NetworkManager
+                sudo systemctl stop wpa_supplicant
+                echo -e "\n${info} Servicios detenidos.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            2)
+                echo -e "\n${info} Reactivando servicios...${reset}\n"
+                sudo systemctl start NetworkManager
+                sudo systemctl start wpa_supplicant
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            3)
+                echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
+                sudo iwconfig
+                echo -e "\n${info} Verificación completada.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            4)
+                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
+                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+                sudo rm -rf wget-log*
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            0)
+                return
+                ;;
+            *)
+                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+                sleep 1
+                ;;
+        esac
+    done
+}
+
 while true $x != "ok"
 do
 
@@ -316,9 +372,10 @@ echo -e "${green}9  ${white}Ayuda (Manual de usario)${reset}"
 echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
 echo -e "${green}11 ${white}Crear Diccionario de Defecto${reset}"
 echo -e "${green}12 ${white}Instalar Drivers${reset}"
-echo -e "${green}13 ${white}Información del Sistema y Red${reset}"
+echo -e "${green}13 ${white}Gestionar servicios interferentes${reset}"
+echo -e "${green}14 ${white}Información del Sistema y Red${reset}"
 echo -e "${bar}"
-echo -e "${green}14 $versionSCT${reset}"
+echo -e "${green}15 $versionSCT${reset}"
 echo -e "${bar}"
 echo -e "${green}0  ${white}Salir${reset}"
 echo -e "\n${barra}"
@@ -389,12 +446,17 @@ case $x in
     instalar_drivers
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
-  13) 
+  13)
+    echo -e "\n${process} ${cyan}Gestionando servicios interferentes...${reset}"
+    gestionar_servicios_interferentes
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+  14) 
     echo -e "\n${process} ${cyan}Información del Sistema y Red...${reset}"
     data_system 
     echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÚ!${reset}"; read
     ;;
-  14)
+  15)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
     sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     sudo rm -rf wget-log*
