@@ -85,26 +85,6 @@ else
     versionSCT="${red}${txt02} ${cyan}$v1${reset}"
 fi
 
-# Función para detener los servicios
-stop_services() {
-    # Detener NetworkManager y wpa_supplicant para evitar conflictos
-    # sudo systemctl stop NetworkManager
-    # sudo systemctl stop wpa_supplicant
-    # sudo systemctl restart NetworkManager
-    services=("NetworkManager" "wpa_supplicant")
-    for service in "${services[@]}"; do
-        echo -e "\nDeteniendo el servicio: ${service}..."
-        sudo systemctl stop "$service"
-
-        # Verificar si el servicio se ha detenido correctamente
-        if [[ $? -eq 0 ]]; then
-            echo -e "${checkmark} ${white}$service ${green}detenido con éxito.${reset}"
-        else
-            echo -e "${error} ${white}No se pudo detener ${service}.${reset}"
-        fi
-    done
-}
-
 # Función para crear el diccionario
 crear_diccionario() {
     # Ruta del archivo de salida donde se almacenará el diccionario final
