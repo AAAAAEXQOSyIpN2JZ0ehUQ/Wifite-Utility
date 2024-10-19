@@ -42,5 +42,6 @@ create_desktop_file "$KALI_MENU_DESKTOP_FILE"
 
 # Actualizar la base de datos del menú para reflejar los cambios
 sudo update-desktop-database
+sudo updatedb
 
 echo "Todos los archivos .desktop han sido creados y la base de datos del menú ha sido actualizada."
