@@ -408,7 +408,7 @@ case $x in
     ;;
   9)
     echo -e "\n${process} ${cyan}Ayuda (MNUAL DE USUARIO)...${reset}"
-    sudo ./wifite_help_ES.sh
+    sudo ./Install/wifite_help_ES.sh
     echo -e "\nPara más información, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
