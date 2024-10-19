@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nombre de la aplicación
-APP_NAME="GUI Wifite"
+APP_NAME="GUI-Wifite"
 
 # Ruta del ejecutable
 EXEC_PATH="/usr/share/kali-menu/exec-in-shell \"wifiteutility\""
