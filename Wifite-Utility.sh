@@ -433,7 +433,7 @@ echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 
 case $x in
   1)
-    echo -e "\n${process} ${cyan}Ejecutando Wifite (PORDEFECTO)${reset}"
+    echo -e "\n${process} ${cyan}Ejecutar Wifite (Modo Predeterminado)...${reset}"
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
@@ -449,60 +449,60 @@ case $x in
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   4)
-    echo -e "\n${process} ${cyan}Ejecutando ataques WEP...${reset}"
+    echo -e "\n${process} ${cyan}Ejecutando Ataques WEP...${reset}"
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wep --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   5)
-    echo -e "\n${process} ${cyan}Capturando handshakes (WPA/WPA2)...${reset}"
+    echo -e "\n${process} ${cyan}Capturando Handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
     sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wpa --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   6)
-    echo -e "\n${process} ${cyan}Crackeando handshakes (WPA/WPA2)...${reset}"
+    echo -e "\n${process} ${cyan}Crackear Handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
     sudo wifite --crack --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   7)
-    echo -e "\n${process} ${cyan}Verificando handshakes existentes...${reset}"
+    echo -e "\n${process} ${cyan}Verificar Handshakes Existentes...${reset}"
     sudo wifite --check --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   8)
-    echo -e "\n${process} ${cyan}Verificando handshakes crackeados...${reset}"
+    echo -e "\n${process} ${cyan}Verificar Handshakes Crackeados...${reset}"
     sudo wifite --cracked --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   9)
-    echo -e "\n${process} ${cyan}Ayuda (MNUAL DE USUARIO)...${reset}"
+    echo -e "\n${process} ${cyan}Ayuda y Manual de Usuario...${reset}"
     sudo ./Install/wifite_help_ES.sh
     echo -e "\nPara más información, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   10)
-    echo -e "\n${process} ${cyan}Instalar wifite y herramientas esenciales...${reset}"
+    echo -e "\n${process} ${cyan}Instalar Wifite y Herramientas Necesarias...${reset}"
     instalar_wifite_y_herramientas
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   11)
-    echo -e "\n${process} ${cyan}Creando diccionario personalizado...${reset}"
+    echo -e "\n${process} ${cyan}Crear Diccionario Personalizado...${reset}"
     crear_diccionario
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   12)
-    echo -e "\n${process} ${cyan}Instalar drivers...${reset}"
+    echo -e "\n${process} ${cyan}Instalar drivers de Red...${reset}"
     instalar_drivers
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   13)
-    echo -e "\n${process} ${cyan}Gestionando servicios interferentes...${reset}"
+    echo -e "\n${process} ${cyan}Gestionar Servicios que Interfieren...${reset}"
     gestionar_servicios_interferentes
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   14) 
-    echo -e "\n${process} ${cyan}Información del Sistema y Red...${reset}"
+    echo -e "\n${process} ${cyan}Información del Sistema y de la Red...${reset}"
     data_system 
     echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÚ!${reset}"; read
     ;;
