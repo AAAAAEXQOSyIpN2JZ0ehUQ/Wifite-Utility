@@ -130,6 +130,75 @@ crear_diccionario() {
     fi
 }
 
+gestionar_wps() {
+    while true; do
+
+        # Mostrar banner
+        fun_banner
+
+        echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
+        echo -e "${green}1  ${white}Iniciar Ataque WPS con Bully${reset}"
+        echo -e "${green}2  ${white}Iniciar Ataque WPS con Reaver${reset}"
+        echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
+        echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
+        echo -e "${green}5  ${white}Verificar el estado del modo monitor${reset}"
+        echo -e "${bar}"
+        echo -e "${green}7 $versionSCT${reset}"
+        echo -e "${bar}"
+        echo -e "${green}0  ${white}Volver al menú principal${reset}"
+        echo -e "\n${barra}"
+        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
+
+        case $option in
+            1)
+                echo -e "\n${info} Iniciando ataque WPS con Bully...${reset}\n"
+                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
+                sudo wifite -v -p 60 --random-mac --wps --wps-only --bully --ignore-locks --daemon
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            2)
+                echo -e "\n${info} Iniciando ataque WPS con Reaver...${reset}\n"
+                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
+                sudo wifite -v -i wlan0mon -p 60 --random-mac --wps --wps-only --reaver --ignore-locks --daemon
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            3)
+                echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+                sudo systemctl stop NetworkManager
+                sudo systemctl stop wpa_supplicant
+                echo -e "\n${info} Servicios detenidos.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            4)
+                echo -e "\n${info} Reactivando servicios...${reset}\n"
+                sudo systemctl start NetworkManager
+                sudo systemctl start wpa_supplicant
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            5)
+                echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
+                sudo iwconfig
+                echo -e "\n${info} Verificación completada.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            6)
+                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
+                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+                sudo rm -rf wget-log*
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            0)
+                return
+                ;;
+            *)
+                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+                sleep 1
+                ;;
+        esac
+    done
+}
+
 # Función para instalar Wifite y herramientas esenciales
 instalar_wifite_y_herramientas() {
     # Preguntar si se desea instalar o actualizar Wifite
@@ -338,23 +407,23 @@ fun_banner
 
 # Script para auditoría de redes Wi-Fi utilizando Wifite
 echo -e "\n${cyan}Selecciona el tipo de ataque:${reset}\n"
-echo -e "${green}1  ${white}Ejecutando Wifite (Por defecto)${reset}"
-echo -e "${green}2  ${white}Ataques WPS${reset}"
-echo -e "${green}3  ${white}Captura de PMKID (WPA/WPA2)${reset}"
-echo -e "${green}4  ${white}Ataques WEP${reset}"
-echo -e "${green}5  ${white}Captura de Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}1  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
+echo -e "${green}2  ${white}Ataques a Redes WPS${reset}"
+echo -e "${green}3  ${white}Capturar PMKID (WPA/WPA2)${reset}"
+echo -e "${green}4  ${white}Ejecutar Ataques WEP${reset}"
+echo -e "${green}5  ${white}Capturar Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}6  ${white}Crackeo de Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}6  ${white}Crackear Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}7  ${indicator} Verificación de Handshakes Existentes${reset}"
-echo -e "${green}8  ${indicator} Verificación de Handshakes Crackeados${reset}"
+echo -e "${green}7  ${indicator} Verificar Handshakes Existentes${reset}"
+echo -e "${green}8  ${indicator} Verificar Handshakes Crackeados${reset}"
 echo -e "${bar}"
-echo -e "${green}9  ${white}Ayuda (Manual de usario)${reset}"
-echo -e "${green}10 ${white}Instalar Wifite y Herramientas Esenciales${reset}"
-echo -e "${green}11 ${white}Crear Diccionario personalizado${reset}"
-echo -e "${green}12 ${white}Instalar Drivers${reset}"
-echo -e "${green}13 ${white}Gestionar servicios interferentes${reset}"
-echo -e "${green}14 ${white}Información del Sistema y Red${reset}"
+echo -e "${green}9  ${white}Ayuda y Manual de Usuario${reset}"
+echo -e "${green}10 ${white}Instalar Wifite y Herramientas Necesarias${reset}"
+echo -e "${green}11 ${white}Crear Diccionario Personalizado${reset}"
+echo -e "${green}12 ${white}Instalar Controladores de Red${reset}"
+echo -e "${green}13 ${white}Gestionar Servicios que Interfieren${reset}"
+echo -e "${green}14 ${white}Información del Sistema y de la Red${reset}"
 echo -e "${bar}"
 echo -e "${green}15 $versionSCT${reset}"
 echo -e "${bar}"
@@ -370,13 +439,13 @@ case $x in
     ;;
   2)
     echo -e "\n${process} ${cyan}Ejecutando ataques WPS...${reset}"
-    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
+    gestionar_wps
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   3)
     echo -e "\n${process} ${cyan}Capturando PMKID (WPA/WPA2)...${reset}"
     crear_diccionario
-    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --pmkid --wpa --dict /usr/share/wordlists/defaultWordList.txt --pmkid-timeout 60 --daemon
+    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --pmkid --dict /usr/share/wordlists/defaultWordList.txt --pmkid-timeout 60 --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   4)
@@ -387,7 +456,7 @@ case $x in
   5)
     echo -e "\n${process} ${cyan}Capturando handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
-    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wpa --dict /usr/share/wordlists/defaultWordList.txt --no-pmkid --daemon
+    sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wpa --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   6)
