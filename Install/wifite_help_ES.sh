@@ -39,7 +39,7 @@ echo -e "  --keep-ivs                                  \033[1;32mRetiene archivo
 echo -e "\n\033[1;34mWPA:\033[0m"
 echo -e "  --wpa                                       \033[1;32mMuestra solo redes encriptadas con \033[1;33mWPA\033[0m \033[1;32m(\033[1;36mincluye WPS\033[1;32m)\033[0m"
 echo -e "  --new-hs                                    \033[1;32mCaptura nuevos \033[1;33mhandshakes\033[0m, ignora \033[1;33mhandshakes \033[1;32mexistentes en \033[1;33mhs\033[0m \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
-echo -e "  --dict \033[1;33m[archivo]\033[0m                            \033[1;32mArchivo que contiene contraseñas para \033[1;32mdesciframiento \033[1;32m(\033[1;31mpredeterminado: \033[0m/usr/share/dict/wordlist-probable.txt\033[1;32m)\033[0m"
+echo -e "  --dict \033[1;33m[archivo]\033[0m                            \033[1;32mArchivo que contiene contraseñas para \033[1;32mdesciframiento \033[1;32m(\033[1;31mpredeterminado: \033[0m/usr/share/wordlists/defaultWordList.txt\033[1;32m)\033[0m"
 
 # WPS
 echo -e "\n\033[1;34mWPS:\033[0m"
