@@ -15,4 +15,5 @@ cd
 sudo apt-get -y update
 sudo apt-get install -y wifite
 sudo apt install -y hcxdumptool hcxtools
-sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/refs/heads/main/Install/crear_guiwifite_desktop.sh -O - | sudo bash && sudo rm -rf wget-log*
+sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/refs/heads/main/Install/crear_guiwifite_desktop.sh -O - | sudo bash
+sudo rm -rf wget-log*
