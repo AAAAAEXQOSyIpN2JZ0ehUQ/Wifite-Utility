@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Nombre de la aplicaciÃ³n
+# Nombre de la aplicación
 APP_NAME="GUI-Wifite"
 
 # Ruta del ejecutable
 EXEC_PATH="/usr/share/kali-menu/exec-in-shell \"wifiteutility\""
 
-# Ruta del Ã­cono
+# Ruta del ícono
 ICON_PATH="kali-wifite"
 
 # Rutas de los archivos .desktop
@@ -26,12 +26,12 @@ Type=Application
 Categories=06-wireless-attacks;
 X-Kali-Package=wifite"
 
-# FunciÃ³n para crear el archivo .desktop
+# Función para crear el archivo .desktop
 create_desktop_file() {
     local file_path="$1"
     echo "$DESKTOP_ENTRY" | sudo tee "$file_path" > /dev/null
     sudo chmod 644 "$file_path"
-    echo "Â¡El archivo .desktop en $file_path se ha creado exitosamente!"
+    echo "¡El archivo .desktop en $file_path se ha creado exitosamente!"
 }
 
 # Crear el archivo .desktop en /usr/share/applications
@@ -40,8 +40,8 @@ create_desktop_file "$APPLICATIONS_DESKTOP_FILE"
 # Crear el archivo .desktop en /usr/share/kali-menu/applications
 create_desktop_file "$KALI_MENU_DESKTOP_FILE"
 
-# Actualizar la base de datos del menÃº para reflejar los cambios
+# Actualizar la base de datos del menú para reflejar los cambios
 sudo update-desktop-database
 sudo updatedb
 
-echo "Todos los archivos .desktop han sido creados y la base de datos del menÃº ha sido actualizada."
+echo "Todos los archivos .desktop han sido creados y la base de datos del menú ha sido actualizada."
