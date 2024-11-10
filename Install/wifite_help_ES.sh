@@ -3,10 +3,10 @@ clear
 
 # Imprimir encabezado
 echo -e "\n\033[1;32m   .               .    "
-echo -e " \033[1;32m.´  ·  .     .  ·  \`.     \033[1;32mwifite2 2.7.0\033[0m"
-echo -e " \033[1;32m:  :  :  \033[1;37m (¯)\033[1;32m  :  :  :   \033[1;37m un auditor de redes inalámbricas por derv82\033[0m"
-echo -e " \033[1;32m\`·  ·  \`\033[1;37m  /¯\\ \033[1;32m·  ·  \`·   \033[1;37m mantenido por kimocoder\033[0m"
-echo -e " \033[1;32m  \`     \033[1;37m /¯¯¯\\    \033[1;32m \`      \033[1;34mhttps://github.com/kimocoder/wifite2\033[0m"
+echo -e " \033[1;32m.Â´  Â·  .     .  Â·  \`.     \033[1;32mwifite2 2.7.0\033[0m"
+echo -e " \033[1;32m:  :  :  \033[1;37m (Â¯)\033[1;32m  :  :  :   \033[1;37m un auditor de redes inalÃ¡mbricas por derv82\033[0m"
+echo -e " \033[1;32m\`Â·  Â·  \`\033[1;37m  /Â¯\\ \033[1;32mÂ·  Â·  \`Â·   \033[1;37m mantenido por kimocoder\033[0m"
+echo -e " \033[1;32m  \`     \033[1;37m /Â¯Â¯Â¯\\    \033[1;32m \`      \033[1;34mhttps://github.com/kimocoder/wifite2\033[0m"
 
 # Opciones
 echo -e "\n\033[1;34mOpciones:\033[0m"
@@ -14,32 +14,32 @@ echo -e "  \033[1;33m-h, --help\033[0m                                 \033[1;36
 
 # Configuraciones
 echo -e "\n\033[1;34mCONFIGURACIONES:\033[0m"
-echo -e "  -v, --verbose\033[0m                               \033[1;32mMuestra más opciones (\033[1;33m-h -v\033[0m). Imprime comandos y salidas. \033[1;32m(\033[1;31mpredeterminado: \033[0msilencioso\033[1;32m)\033[0m\n"
-echo -e "  -i [interfaz]\033[0m                               \033[1;32mInterfaz inalámbrica a usar, por ejemplo, \033[1;33mwlan0mon\033[0m\033[1;32m (\033[1;31mpredeterminado: \033[0mpreguntar\033[1;32m)\033[0m"
-echo -e "  -c [canal]\033[0m                                  \033[1;32mCanal inalámbrico a escanear, por ejemplo, \033[1;33m1,3-6\033[0m\033[1;32m (\033[1;31mpredeterminado: \033[0mtodos los canales de 2Ghz\033[1;32m)\033[0m"
+echo -e "  -v, --verbose\033[0m                               \033[1;32mMuestra mÃ¡s opciones (\033[1;33m-h -v\033[0m). Imprime comandos y salidas. \033[1;32m(\033[1;31mpredeterminado: \033[0msilencioso\033[1;32m)\033[0m\n"
+echo -e "  -i [interfaz]\033[0m                               \033[1;32mInterfaz inalÃ¡mbrica a usar, por ejemplo, \033[1;33mwlan0mon\033[0m\033[1;32m (\033[1;31mpredeterminado: \033[0mpreguntar\033[1;32m)\033[0m"
+echo -e "  -c [canal]\033[0m                                  \033[1;32mCanal inalÃ¡mbrico a escanear, por ejemplo, \033[1;33m1,3-6\033[0m\033[1;32m (\033[1;31mpredeterminado: \033[0mtodos los canales de 2Ghz\033[1;32m)\033[0m"
 echo -e "  -inf, --infinite\033[0m                            \033[1;32mHabilita el modo de ataque infinito. Modifica el \033[1;32mtiempo de escaneo con \033[1;33m-p\033[0m \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m\n"
-echo -e "  -mac, --random-mac\033[0m                          \033[1;32mAleatoriza la dirección MAC de la tarjeta inalámbrica \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
-echo -e "  -p [tiempo_escaneo]\033[0m                         \033[1;32mPillage: Ataca todos los objetivos después del \033[1;32mtiempo_escaneo \033[1;32m(\033[1;36msegundos\033[1;32m)\033[0m"
+echo -e "  -mac, --random-mac\033[0m                          \033[1;32mAleatoriza la direcciÃ³n MAC de la tarjeta inalÃ¡mbrica \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
+echo -e "  -p [tiempo_escaneo]\033[0m                         \033[1;32mPillage: Ataca todos los objetivos despuÃ©s del \033[1;32mtiempo_escaneo \033[1;32m(\033[1;36msegundos\033[1;32m)\033[0m"
 echo -e "  --kill\033[0m                                      \033[1;32mMata procesos que conflicten con \033[1;33mAirmon/Airodump \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
-echo -e "  -pow [min_potencia], --power [min_potencia]\033[0m \033[1;32mAtaca cualquier objetivo con al menos \033[1;33mmin_potencia \033[1;32mde señal\033[0m"
+echo -e "  -pow [min_potencia], --power [min_potencia]\033[0m \033[1;32mAtaca cualquier objetivo con al menos \033[1;33mmin_potencia \033[1;32mde seÃ±al\033[0m"
 echo -e "  --skip-crack\033[0m                                \033[1;32mOmite el desciframiento de handshakes/pmkid \033[1;32mcapturados (\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 echo -e "  -first [ataque_max], --first [ataque_max]\033[0m \033[0m  \033[1;32mAtaca los primeros \033[1;33mataque_max\033[0m objetivos\033[0m"
 echo -e "  -ic, --ignore-cracked\033[0m                       \033[1;32mOculta objetivos previamente descifrados \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 echo -e "  --clients-only\033[0m                              \033[1;32mMuestra solo objetivos que tengan \033[1;33mclientes\033[0m asociados \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 echo -e "  --nodeauths\033[0m                                 \033[1;32mModo pasivo: Nunca desautentica clientes \033[1;32m(\033[1;31mpredeterminado: \033[0mdesautenticar objetivos\033[1;32m)\033[0m"
-echo -e "  --daemon\033[0m                                    \033[1;32mVuelve a poner el dispositivo en modo gestionado \033[1;32mdespués de salir (\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
+echo -e "  --daemon\033[0m                                    \033[1;32mVuelve a poner el dispositivo en modo gestionado \033[1;32mdespuÃ©s de salir (\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 
 # WEP
 echo -e "\n\033[1;34mWEP:\033[0m"
 echo -e "  --wep                                       \033[1;32mMuestra solo redes encriptadas con \033[1;33mWEP\033[0m"
-echo -e "  --require-fakeauth                          \033[1;32mFalla ataques si la autenticación falsa falla \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
+echo -e "  --require-fakeauth                          \033[1;32mFalla ataques si la autenticaciÃ³n falsa falla \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 echo -e "  --keep-ivs                                  \033[1;32mRetiene archivos \033[1;33m.IVS\033[0m \033[1;32my los reutiliza al \033[1;32mdescifrar (\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
 
 # WPA
 echo -e "\n\033[1;34mWPA:\033[0m"
 echo -e "  --wpa                                       \033[1;32mMuestra solo redes encriptadas con \033[1;33mWPA\033[0m \033[1;32m(\033[1;36mincluye WPS\033[1;32m)\033[0m"
 echo -e "  --new-hs                                    \033[1;32mCaptura nuevos \033[1;33mhandshakes\033[0m, ignora \033[1;33mhandshakes \033[1;32mexistentes en \033[1;33mhs\033[0m \033[1;32m(\033[1;31mpredeterminado: \033[0mdesactivado\033[1;32m)\033[0m"
-echo -e "  --dict \033[1;33m[archivo]\033[0m                            \033[1;32mArchivo que contiene contraseñas para \033[1;32mdesciframiento \033[1;32m(\033[1;31mpredeterminado: \033[0m/usr/share/dict/wordlist-probable.txt\033[1;32m)\033[0m"
+echo -e "  --dict \033[1;33m[archivo]\033[0m                            \033[1;32mArchivo que contiene contraseÃ±as para \033[1;32mdesciframiento \033[1;32m(\033[1;31mpredeterminado: \033[0m/usr/share/dict/wordlist-probable.txt\033[1;32m)\033[0m"
 
 # WPS
 echo -e "\n\033[1;34mWPS:\033[0m"
