@@ -58,44 +58,34 @@ Ejecute el script simplemente ejecuta el siguiente comando `wifiteutility`  en t
 wifiteutility
 ```
 
-## :bookmark_tabs: Notas
-Este script permite ejecutar varios comandos útiles para auditorías Wi-Fi, incluyendo:
-
-- Instalar/Actualizar Wifite: El script se encarga de instalar o actualizar la última versión de Wifite, garantizando siempre el acceso a una de las herramientas más potentes para auditorías inalámbricas.
-- Crear Diccionario Personalizado: El script permite generar un diccionario a partir de múltiples listas de palabras, optimizando su uso para ataques de fuerza bruta en auditorías.
-- Instalar Herramientas Esenciales: El script gestiona la instalación de herramientas complementarias, como hcxdumptool, libpcap, y otras esenciales para auditorías Wi-Fi.
-- Instalar Drivers Wi-Fi: El script facilita la instalación de drivers para adaptadores Wi-Fi, como rtl8814au, rtl88xxau, asegurando la compatibilidad con auditorías.
-- Automatización Total: El script automatiza todo el proceso de instalación, eliminando la necesidad de realizar configuraciones manuales.
-- Modularidad: El script te permite seleccionar qué herramientas deseas instalar, adaptándose a tus necesidades específicas.
-- Soporte Extensivo de Drivers: El script garantiza la compatibilidad con una amplia gama de adaptadores Wi-Fi frecuentemente utilizados en pentesting.
-- Instalar Pyrit: Instala o actualiza Pyrit para realizar ataques a redes inalámbricas utilizando la aceleración por GPU.
-
 ## :star2: Características 
 
-- **Instalación simplificada de Wifite y herramientas esenciales**:
-  - Actualiza o instala Wifite fácilmente con solo un par de clics.
-  - Instalación de herramientas complementarias como hcxdumptool, hcxtools, libpcap, entre otras.
+- **Instalación Simplificada de Wifite y Herramientas Esenciales**:  
+  - Instala o actualiza Wifite y otras herramientas importantes como hcxdumptool, libpcap, entre otras, con un solo comando.
+  
+- **Automatización de la Instalación**:  
+  - Automatiza todo el proceso de instalación de herramientas y drivers necesarios, eliminando la necesidad de configuraciones manuales. 
+  
+- **Creación de Diccionarios Personalizados**:  
+  - Genera un diccionario optimizado para ataques de fuerza bruta combinando múltiples listas de palabras y filtrando palabras de longitud mínima.
+  
+- **Gestión de Drivers para Adaptadores Wi-Fi**:  
+  - Instala rápidamente drivers para adaptadores Wi-Fi como rtl8188eus, rtl8814au, rtl88xxau, entre otros, asegurando la compatibilidad con auditorías de redes inalámbricas.
+  - Facilita la instalación de módulos del kernel y headers necesarios para la compilación de drivers.
+  
+- **Soporte para Pyrit**:  
+  - Instala o actualiza Pyrit para realizar ataques a redes inalámbricas utilizando la aceleración por GPU, con soporte para su compilación desde el código fuente.
+  
+- **Interfaz Gráfica Amigable**:  
+  - Incluye una GUI simple que facilita la navegación por las distintas opciones del script, con un banner personalizado para mostrar información relevante sobre las herramientas utilizadas.
 
-- **Creación automática de diccionarios personalizados**:
-  - Combina varias listas de palabras preexistentes y genera un diccionario optimizado para pruebas de penetración.
-  - Filtra palabras de longitud mínima para mayor efectividad en ataques de fuerza bruta.
-
-- **Gestión de drivers de adaptadores Wi-Fi**:
-  - Permite la instalación rápida de drivers para adaptadores como rtl8188eus, rtl8814au, rtl88xxau, entre otros.
-  - Facilita la instalación de headers y otros módulos del kernel necesarios para la compilación de drivers.
-
-- **Interfaz gráfica amigable**:
-  - Incluye una GUI simple que facilita la navegación por las distintas opciones del script.
-  - Banner personalizado que muestra información relevante sobre las herramientas utilizadas.
-
-- **Personalización y mantenimiento de Pyrit**:
-  - Instala o actualiza Pyrit, una potente herramienta para ataques a redes inalámbricas con GPU.
-  - Incluye comandos de instalación y compilación de Pyrit directamente desde el código fuente.
+- **Automatización Total**:  
+  - El script automatiza todo el proceso, desde la instalación hasta la configuración, para que puedas empezar a auditar redes Wi-Fi sin complicaciones adicionales.
 
 ## :hammer_and_wrench: Requisitos 
 
 - Sistema Operativo: Linux/Unix
-- Dependencias: Bash, Wifite, y otras herramientas de auditoría Wi-Fi.
+- Dependencias: Wifite, hcxdumptool, hcxtools, libpcap, Pyrit y otras herramientas de auditoría Wi-Fi.
 
 ## :memo: Personalización
 
