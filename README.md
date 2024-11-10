@@ -47,7 +47,7 @@ sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utilit
 
 ## :computer: Instalación en una Línea
 ```bash
-sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash && sudo rm -rf wget-log*
+sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
 ```
 
 ## :rocket: Modo de Uso
