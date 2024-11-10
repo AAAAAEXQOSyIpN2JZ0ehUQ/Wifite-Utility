@@ -2,7 +2,7 @@
 #====================================================
 #   SCRIPT:                   Wifite Utility
 #   DESARROLLADO POR:         Jony Rivera (Dzhoni)
-#   FECHA DE ACTUALIZACIÓN:   08-09-2024 
+#   FECHA DE ACTUALIZACIÃ“N:   08-09-2024 
 #   CONTACTO POR TELEGRAMA:   https://t.me/Dzhoni_dev
 #   GITHUB OFICIAL:           https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility
 #====================================================
@@ -45,38 +45,38 @@ unknown="${white}[${blue}!${white}]${blue}"
 process="${white}[${magenta}>>${white}]${magenta}"
 indicator="${red}==>${cyan}"
 
-# Barra de separación
+# Barra de separaciÃ³n
 barra="${blue}|--------------------------------------------|${reset}"
 bar="${yellow}----------------------------------------------${reset}"
 
-# Comprobación de permisos de root
+# ComprobaciÃ³n de permisos de root
 [[ "$(whoami)" != "root" ]] && {
     echo -e "\n${yellow}[${red}Error${yellow}] ${white}- ${yellow}Necesitas ejecutar esto como administrador (${red}root${yellow})${reset}"
     echo -e "\n${green} sudo $0 ${reset}"
     exit 0
 }
 
-# menú de interfaz de usuario
+# menÃº de interfaz de usuario
 user_interface_menu() {
 
 fun_banner() {
   # Mostrar segundo banner
   clear
   echo -e "\n${green}   .               .    "
-  echo -e " ${green}.´  ·  .     .  ·  \`.   ${green}wifite2 2.7.0${reset}"
-  echo -e " ${green}:  :  :  ${white}(¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
-  echo -e " ${green}\`·  ·  \`${white} /¯\\ ${green}·  ·  \`·   ${white}maintained by kimocoder${reset}"
-  echo -e " ${green}  \`     ${white}/¯¯¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
+  echo -e " ${green}.Â´  Â·  .     .  Â·  \`.   ${green}wifite2 2.7.0${reset}"
+  echo -e " ${green}:  :  :  ${white}(Â¯)${green}  :  :  :   ${white}a wireless auditor by derv82${reset}"
+  echo -e " ${green}\`Â·  Â·  \`${white} /Â¯\\ ${green}Â·  Â·  \`Â·   ${white}maintained by kimocoder${reset}"
+  echo -e " ${green}  \`     ${white}/Â¯Â¯Â¯\\    ${green} \`     ${cyan}https://github.com/kimocoder/wifite2${reset}"
   echo -e " \n${green}GUI Version codificada por: Jony Rivera (Dzhoni) ${reset}"
 }
 
-# Función de actualización
+# FunciÃ³n de actualizaciÃ³n
 P_SERVER="https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/Install/"
 v1=$(curl -sSL "${P_SERVER}/versionact")
 v2=$(cat /opt/Wifite-Utility/Install/versionact)
 
-txt01="Tu versión está actualizada"
-txt02="¡Hay una actualización disponible!"
+txt01="Tu versiÃ³n estÃ¡ actualizada"
+txt02="Â¡Hay una actualizaciÃ³n disponible!"
 
 # Compara las versiones y define el mensaje
 if [[ $v1 = $v2 ]]; then
@@ -85,16 +85,16 @@ else
     versionSCT="${red}${txt02} ${cyan}$v1${reset}"
 fi
 
-# Función para crear el diccionario
+# FunciÃ³n para crear el diccionario
 crear_diccionario() {
-    # Ruta del archivo de salida donde se almacenará el diccionario final
+    # Ruta del archivo de salida donde se almacenarÃ¡ el diccionario final
     local output_file="/usr/share/wordlists/defaultWordList.txt"
 
     # Verificar si el diccionario ya existe para evitar sobrescribirlo
     if [[ ! -f "$output_file" ]]; then
         echo -e "\n${info} Creando diccionario.....${reset}\n"
 
-        # Descomprimir el archivo rockyou.txt.gz si aún no ha sido descomprimido
+        # Descomprimir el archivo rockyou.txt.gz si aÃºn no ha sido descomprimido
         sudo apt install -y wordlists
         if [[ ! -f "/usr/share/wordlists/rockyou.txt" ]]; then
             sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
@@ -111,16 +111,16 @@ crear_diccionario() {
         # Ordenar las palabras en el archivo combinado y eliminar duplicados
         sort diccionario_combinado.txt | uniq > diccionario_sin_duplicados.txt
 
-        # Filtrar las palabras con 8 caracteres o más y guardarlas en el archivo final
+        # Filtrar las palabras con 8 caracteres o mÃ¡s y guardarlas en el archivo final
         grep -E '\b\w{8,}\b' diccionario_sin_duplicados.txt > "$output_file"
 
-        # Asignar permisos de ejecución al diccionario final (aunque no es estrictamente necesario)
+        # Asignar permisos de ejecuciÃ³n al diccionario final (aunque no es estrictamente necesario)
         sudo chmod +x "$output_file"
         
         # Eliminar los archivos temporales utilizados en el proceso
         sudo rm -rf diccionario_combinado.txt diccionario_sin_duplicados.txt
 
-        # Contar y mostrar el número total de palabras en el diccionario final
+        # Contar y mostrar el nÃºmero total de palabras en el diccionario final
         wc -l "$output_file"
 
         echo -e "\n${info} Diccionario creado en ${output_file}${reset}\n"
@@ -136,7 +136,7 @@ gestionar_wps() {
         # Mostrar banner
         fun_banner
 
-        echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
+        echo -e "\n${cyan}Selecciona la opciÃ³n que deseas realizar:${reset}\n"
         echo -e "${green}1  ${white}Iniciar Ataque WPS con Bully${reset}"
         echo -e "${green}2  ${white}Iniciar Ataque WPS con Reaver${reset}"
         echo -e "${bar}"
@@ -146,9 +146,9 @@ gestionar_wps() {
         echo -e "${bar}"
         echo -e "${green}7 $versionSCT${reset}"
         echo -e "${bar}"
-        echo -e "${green}0  ${white}Volver al menú principal${reset}"
+        echo -e "${green}0  ${white}Volver al menÃº principal${reset}"
         echo -e "\n${barra}"
-        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
+        echo -ne "\n${bold}${yellow} Elige una opciÃ³n:${white} >> "; read option
 
         case $option in
             1)
@@ -180,7 +180,7 @@ gestionar_wps() {
             5)
                 echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
                 sudo iwconfig
-                echo -e "\n${info} Verificación completada.${reset}"
+                echo -e "\n${info} VerificaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             6)
@@ -193,27 +193,27 @@ gestionar_wps() {
                 return
                 ;;
             *)
-                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+                echo -e "\n${error} ${red}OpciÃ³n no vÃ¡lida, por favor intente de nuevo.${reset}"
                 sleep 1
                 ;;
         esac
     done
 }
 
-# Función para instalar Wifite y herramientas esenciales
+# FunciÃ³n para instalar Wifite y herramientas esenciales
 instalar_wifite_y_herramientas() {
     # Preguntar si se desea instalar o actualizar Wifite
-    read -p "$(echo -e "\n${green}¿Deseas instalar o actualizar Wifite? (Y/n):${white} ")" instalar_wifite
+    read -p "$(echo -e "\n${green}Â¿Deseas instalar o actualizar Wifite? (Y/n):${white} ")" instalar_wifite
     if [[ $instalar_wifite =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Wifite.....${reset}\n"
         sudo apt-get -y update
         sudo apt-get install -y wifite
     else
-        echo -e "\n${info} Wifite no será instalado o actualizado.${reset}\n"
+        echo -e "\n${info} Wifite no serÃ¡ instalado o actualizado.${reset}\n"
     fi
 
     # Preguntar si se desean instalar las herramientas esenciales
-    read -p "$(echo -e "\n${green}¿Deseas instalar o actualizar las herramientas esenciales? (Y/n):${white} ")" instalar_herramientas 
+    read -p "$(echo -e "\n${green}Â¿Deseas instalar o actualizar las herramientas esenciales? (Y/n):${white} ")" instalar_herramientas 
     if [[ $instalar_herramientas =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Herramientas Esenciales.....${reset}\n"
         # sudo apt install -y git hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
@@ -221,11 +221,11 @@ instalar_wifite_y_herramientas() {
         sudo pip3 install scapy numpy
 
     else
-        echo -e "\n${info} Las herramientas esenciales no serán instaladas o actualizadas.${reset}\n"
+        echo -e "\n${info} Las herramientas esenciales no serÃ¡n instaladas o actualizadas.${reset}\n"
     fi
 
     # Preguntar si se desea instalar o actualizar Pyrit
-    read -p "$(echo -e "\n${green}¿Deseas instalar o actualizar Pyrit? (Y/n):${white} ")" instalar_pyrit 
+    read -p "$(echo -e "\n${green}Â¿Deseas instalar o actualizar Pyrit? (Y/n):${white} ")" instalar_pyrit 
     if [[ $instalar_pyrit =~ ^[Yy]$ ]]; then
         echo -e "\n${process} Instalando Pyrit......${reset}\n"
         cd /opt
@@ -239,29 +239,29 @@ instalar_wifite_y_herramientas() {
         pyrit -h
         cd
     else
-        echo -e "\n${info} Pyrit no será instalado o actualizado.${reset}\n"
+        echo -e "\n${info} Pyrit no serÃ¡ instalado o actualizado.${reset}\n"
     fi
 }
 
 data_system() {
-    # Mostrar la configuración de red usando ifconfig
-    echo -e "\n${info} Mostrando información de red con ifconfig...${reset}\n"
+    # Mostrar la configuraciÃ³n de red usando ifconfig
+    echo -e "\n${info} Mostrando informaciÃ³n de red con ifconfig...${reset}\n"
     ifconfig
 
-    # Mostrar información sobre interfaces inalámbricas utilizando iwconfig
-    echo -e "\n${info} Mostrando información de interfaces inalámbricas con iwconfig...${reset}\n"
+    # Mostrar informaciÃ³n sobre interfaces inalÃ¡mbricas utilizando iwconfig
+    echo -e "\n${info} Mostrando informaciÃ³n de interfaces inalÃ¡mbricas con iwconfig...${reset}\n"
     iwconfig
 
     # Mostrar la lista de dispositivos USB conectados usando lsusb
     echo -e "\n${info} Mostrando dispositivos USB conectados con lsusb...${reset}\n"
     lsusb
 
-    # Mostrar información detallada sobre las capacidades inalámbricas del sistema usando iw list
-    echo -e "\n${info} Mostrando capacidades inalámbricas con iw list...${reset}\n"
+    # Mostrar informaciÃ³n detallada sobre las capacidades inalÃ¡mbricas del sistema usando iw list
+    echo -e "\n${info} Mostrando capacidades inalÃ¡mbricas con iw list...${reset}\n"
     iw list | grep -A 10 "Supported interface modes:" | grep "*"
 }
 
-# Función para instalar drivers
+# FunciÃ³n para instalar drivers
 instalar_drivers() {
     while true; do
 
@@ -278,39 +278,39 @@ instalar_drivers() {
         echo -e "${bar}"
         echo -e "${green}7 $versionSCT${reset}"
         echo -e "${bar}"
-        echo -e "${green}0  ${white}Volver al menú principal${reset}"
+        echo -e "${green}0  ${white}Volver al menÃº principal${reset}"
         echo -e "\n${barra}"
-        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
+        echo -ne "\n${bold}${yellow} Elige una opciÃ³n:${white} >> "; read option
 
         case $option in
             1)
-                echo -e "\n${info} Instalando build-essential, dkms y headers del núcleo...${reset}\n"
+                echo -e "\n${info} Instalando build-essential, dkms y headers del nÃºcleo...${reset}\n"
                 sudo apt-get install -y build-essential dkms linux-headers-$(uname -r)
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             2)
                 echo -e "\n${info} Instalando realtek-rtl8188eus-dkms...${reset}\n"
                 sudo apt install -y realtek-rtl8188eus-dkms
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             3)
                 echo -e "\n${info} Instalando realtek-rtl8814au-dkms...${reset}\n"
                 sudo apt install -y realtek-rtl8814au-dkms
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             4)
                 echo -e "\n${info} Instalando realtek-rtl8723cs-dkms...${reset}\n"
                 sudo apt install -y realtek-rtl8723cs-dkms
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             5)
                 echo -e "\n${info} Instalando realtek-rtl88xxau-dkms...${reset}\n"
                 sudo apt install -y realtek-rtl88xxau-dkms
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             6)
@@ -324,7 +324,7 @@ instalar_drivers() {
                 sudo dkms install rtl8188fu/1.0
                 sudo cp ./rtl8188fu/firmware/rtl8188fufw.bin /lib/firmware/rtlwifi/
                 cd
-                echo -e "\n${info} Instalación completada.${reset}"
+                echo -e "\n${info} InstalaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
             7)
@@ -337,30 +337,30 @@ instalar_drivers() {
                 return
                 ;;
             *)
-                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+                echo -e "\n${error} ${red}OpciÃ³n no vÃ¡lida, por favor intente de nuevo.${reset}"
                 sleep 1
                 ;;
         esac
     done
 }
 
-# Función para gestionar servicios y verificar el modo monitor
+# FunciÃ³n para gestionar servicios y verificar el modo monitor
 gestionar_servicios_interferentes() {
     while true; do
 
         # Mostrar banner
         fun_banner
 
-        echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
+        echo -e "\n${cyan}Selecciona la opciÃ³n que deseas realizar:${reset}\n"
         echo -e "${green}1  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
         echo -e "${green}2  ${white}Reactivar servicios detenidos${reset}"
         echo -e "${green}3  ${white}Verificar el estado del modo monitor${reset}"
         echo -e "${bar}"
         echo -e "${green}4 $versionSCT${reset}"
         echo -e "${bar}"
-        echo -e "${green}0  ${white}Volver al menú principal${reset}"
+        echo -e "${green}0  ${white}Volver al menÃº principal${reset}"
         echo -e "\n${barra}"
-        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
+        echo -ne "\n${bold}${yellow} Elige una opciÃ³n:${white} >> "; read option
 
         case $option in
             1)
@@ -380,7 +380,7 @@ gestionar_servicios_interferentes() {
             3)
                 echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
                 sudo iwconfig
-                echo -e "\n${info} Verificación completada.${reset}"
+                echo -e "\n${info} VerificaciÃ³n completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             4)
@@ -393,7 +393,7 @@ gestionar_servicios_interferentes() {
                 return
                 ;;
             *)
-                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+                echo -e "\n${error} ${red}OpciÃ³n no vÃ¡lida, por favor intente de nuevo.${reset}"
                 sleep 1
                 ;;
         esac
@@ -406,7 +406,7 @@ do
 # Mostrar banner
 fun_banner
 
-# Script para auditoría de redes Wi-Fi utilizando Wifite
+# Script para auditorÃ­a de redes Wi-Fi utilizando Wifite
 echo -e "\n${cyan}Selecciona el tipo de ataque:${reset}\n"
 echo -e "${green}1  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
 echo -e "${green}2  ${white}Ataques a Redes WPS${reset}"
@@ -427,13 +427,13 @@ echo -e "${green}12 ${white}Instalar Controladores de Red${reset}"
 echo -e "${bar}"
 echo -e "${green}13 ${white}Gestionar Servicios que Interfieren${reset}"
 echo -e "${bar}"
-echo -e "${green}14 ${white}Información del Sistema y de la Red${reset}"
+echo -e "${green}14 ${white}InformaciÃ³n del Sistema y de la Red${reset}"
 echo -e "${bar}"
 echo -e "${green}15 $versionSCT${reset}"
 echo -e "${bar}"
 echo -e "${green}0  ${white}Salir${reset}"
 echo -e "\n${barra}"
-echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
+echo -ne "\n${bold}${yellow} Elige una opciÃ³n:${white} >> "; read x
 
 case $x in
   1)
@@ -482,7 +482,7 @@ case $x in
   9)
     echo -e "\n${process} ${cyan}Ayuda y Manual de Usuario...${reset}"
     sudo /opt/Wifite-Utility/Install/wifite_help_ES.sh 
-    echo -e "\nPara más información, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
+    echo -e "\nPara mÃ¡s informaciÃ³n, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   10)
@@ -506,9 +506,9 @@ case $x in
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   14) 
-    echo -e "\n${process} ${cyan}Información del Sistema y de la Red...${reset}"
+    echo -e "\n${process} ${cyan}InformaciÃ³n del Sistema y de la Red...${reset}"
     data_system 
-    echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÚ!${reset}"; read
+    echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÃš!${reset}"; read
     ;;
   15)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
@@ -521,13 +521,13 @@ case $x in
     exit 0
     ;;
   *)
-    echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
+    echo -e "\n${error} ${red}OpciÃ³n no vÃ¡lida, por favor intente de nuevo.${reset}"
     sleep 1
 esac
 done
 }
 
-# Ejecución del menú principal
+# EjecuciÃ³n del menÃº principal
 user_interface_menu
 
 # Fin del script
