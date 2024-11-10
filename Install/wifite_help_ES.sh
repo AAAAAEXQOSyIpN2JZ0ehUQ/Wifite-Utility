@@ -58,5 +58,5 @@ echo -e "  --pmkid-timeout \033[1;33m[seg]\033[0m                       \033[1;3
 # Comandos
 echo -e "\n\033[1;34mCOMANDOS:\033[0m"
 echo -e "  --cracked                                   \033[1;32mImprimir puntos de acceso previamente \033[1;33mdescifrados\033[0m"
-echo -e "  --check \033[1;33m[archivo]\033[0m                           \033[1;32mVerificar un archivo \033[1;33m.cap \033[1;32m(\033[1;36mo todos los archivos \033[1;33mhs/*.cap\033[1;32m) \033[0mpara detectar protocolos de enlace WPA\033[0m"
+echo -e "  --check \033[1;33m[archivo]\033[0m                           \033[1;32mVerificar un archivo \033[1;33m.cap \033[1;32m(\033[1;36mo todos los archivos \033[1;33mhs/*.cap\033[1;32m) \033[1;32mpara detectar protocolos de enlace WPA\033[0m"
 echo -e "  --crack \033[1;33m[archivo]\033[0m                           \033[1;32mMostrar comandos para descifrar un protocolo de enlace capturado\033[0m"
