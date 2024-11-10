@@ -19,6 +19,7 @@ cd /opt
 sudo rm -rf Wifite-Utility
 sudo git clone https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility.git
 sudo chmod +x Wifite-Utility/*
+sudo chmod +x Wifite-Utility/Install/* 
 cd Wifite-Utility
 ls -ltha
 ```
@@ -41,12 +42,12 @@ sudo apt install -y hcxdumptool hcxtools
 
 ## :computer: Crear Desktop
 ```bash
-sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/refs/heads/main/Install/crear_guiwifite_desktop.sh -O - | sudo bash
+sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/refs/heads/main/Install/crear_guiwifite_desktop.sh -O - | sudo bash && sudo rm -rf wget-log*
 ```
 
 ## :computer: Instalación en una Línea
 ```bash
-sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash && sudo rm -rf wget-log*
 ```
 
 ## :rocket: Modo de Uso
