@@ -40,6 +40,20 @@ sudo apt-get install -y wifite
 sudo apt install -y hcxdumptool hcxtools
 ```
 
+## :package: Paquete (Inestable)
+```bash
+cd /opt
+sudo rm -rf Pyrit
+sudo git clone https://github.com/JPaulMora/Pyrit.git
+sudo chmod +x Pyrit/*
+cd Pyrit
+sudo python3 setup.py clean
+sudo python3 setup.py build
+sudo python3 setup.py install
+pyrit -h
+cd
+```
+
 ## :computer: Crear Desktop
 ```bash
 sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/refs/heads/main/Install/crear_guiwifite_desktop.sh -O - | sudo bash && sudo rm -rf wget-log*
