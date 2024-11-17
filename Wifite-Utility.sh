@@ -217,7 +217,7 @@ instalar_wifite_y_herramientas() {
     if [[ $instalar_herramientas =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Herramientas Esenciales.....${reset}\n"
         sudo apt install git hcxdumptool hcxtools python2.7-dev python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
-        sudo apt install -y python3 python3-pip build-essential libssl-dev libpcap-dev libffi-dev
+        sudo apt install -y python3 python3-pip build-essential libffi-dev
         sudo pip3 install scapy numpy
 
     else
