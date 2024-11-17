@@ -36,12 +36,15 @@ cd
 ## :package: Paquete
 ```bash
 sudo apt-get -y update
-sudo apt-get install -y wifite
-sudo apt install -y hcxdumptool hcxtools
+sudo apt-get install -y wifite hcxdumptool hcxtools
 ```
 
 ## :package: Paquete (Inestable)
 ```bash
+cd 
+sudo apt install git python2.7-dev python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
+sudo apt install -y python3 build-essential libffi-dev
+sudo pip3 install scapy numpy
 cd /opt
 sudo rm -rf Pyrit
 sudo git clone https://github.com/JPaulMora/Pyrit.git
@@ -50,6 +53,7 @@ cd Pyrit
 sudo python3 setup.py clean
 sudo python3 setup.py build
 sudo python3 setup.py install
+cp pyrit /usr/local/bin/
 pyrit -h
 cd
 ```
