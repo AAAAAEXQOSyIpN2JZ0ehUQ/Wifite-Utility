@@ -216,8 +216,8 @@ instalar_wifite_y_herramientas() {
     read -p "$(echo -e "\n${green}¿Deseas instalar o actualizar las herramientas esenciales? (Y/n):${white} ")" instalar_herramientas 
     if [[ $instalar_herramientas =~ ^[Yy]$ ]]; then
         echo -e "\n${info} Instalando Herramientas Esenciales.....${reset}\n"
-        # sudo apt install -y git hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
         sudo apt install git hcxdumptool hcxtools python2.7-dev python3-dev python3-pip libssl-dev libpcap-dev zlib1g-dev libsqlite3-dev
+        sudo apt install -y python3 python3-pip build-essential libssl-dev libpcap-dev libffi-dev
         sudo pip3 install scapy numpy
 
     else
@@ -236,6 +236,7 @@ instalar_wifite_y_herramientas() {
         sudo python3 setup.py clean
         sudo python3 setup.py build
         sudo python3 setup.py install
+        sudo cp pyrit /usr/local/bin/
         pyrit -h
         cd
     else
