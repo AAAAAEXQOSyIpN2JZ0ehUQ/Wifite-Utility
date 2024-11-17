@@ -36,7 +36,8 @@ cd
 ## :package: Paquete
 ```bash
 sudo apt-get -y update
-sudo apt-get install -y wifite hcxdumptool hcxtools
+sudo apt-get install -y wifite
+sudo apt install -y hcxdumptool hcxtools
 ```
 
 ## :computer: Crear Desktop
