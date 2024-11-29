@@ -142,9 +142,11 @@ gestionar_wps() {
         echo -e "${bar}"
         echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
         echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}5  ${white}Verificar el estado del modo monitor${reset}"
+        echo -e "${green}5  ${white}Activando modo monitor${reset}"
+        echo -e "${green}6  ${white}Reactivando modo managed${reset}"
+        echo -e "${green}7  ${white}Verificar el estado del modo monitor${reset}"
         echo -e "${bar}"
-        echo -e "${green}7 $versionSCT${reset}"
+        echo -e "${green}8 $versionSCT${reset}"
         echo -e "${bar}"
         echo -e "${green}0  ${white}Volver al menú principal${reset}"
         echo -e "\n${barra}"
@@ -178,6 +180,26 @@ gestionar_wps() {
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             5)
+                echo -e "\n${info} Activando modo monitor...${reset}\n"
+                sudo ip link set wlan0 down
+                sudo iw dev wlan0 interface add wlan0mon type monitor
+                sudo ip link set wlan0mon up
+                iw dev
+                nmcli device status
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            6)
+                echo -e "\n${info} Reactivando modo managed...${reset}\n"
+                sudo ip link set wlan0mon down
+                sudo iw dev wlan0mon del
+                sudo ip link set wlan0 up
+                iw dev
+                nmcli device status
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            7)
                 echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
                 sudo iwconfig
                 echo -e "\n${info} Verificación completada.${reset}"
@@ -355,9 +377,11 @@ gestionar_servicios_interferentes() {
         echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
         echo -e "${green}1  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
         echo -e "${green}2  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}3  ${white}Verificar el estado del modo monitor${reset}"
+        echo -e "${green}3  ${white}Activando modo monitor${reset}"
+        echo -e "${green}4  ${white}Reactivando modo managed${reset}"
+        echo -e "${green}5  ${white}Verificar el estado del modo monitor${reset}"
         echo -e "${bar}"
-        echo -e "${green}4 $versionSCT${reset}"
+        echo -e "${green}6 $versionSCT${reset}"
         echo -e "${bar}"
         echo -e "${green}0  ${white}Volver al menú principal${reset}"
         echo -e "\n${barra}"
@@ -379,12 +403,32 @@ gestionar_servicios_interferentes() {
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             3)
+                echo -e "\n${info} Activando modo monitor...${reset}\n"
+                sudo ip link set wlan0 down
+                sudo iw dev wlan0 interface add wlan0mon type monitor
+                sudo ip link set wlan0mon up
+                iw dev
+                nmcli device status
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            4)
+                echo -e "\n${info} Reactivando modo managed...${reset}\n"
+                sudo ip link set wlan0mon down
+                sudo iw dev wlan0mon del
+                sudo ip link set wlan0 up
+                iw dev
+                nmcli device status
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            5)
                 echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
                 sudo iwconfig
                 echo -e "\n${info} Verificación completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            4)
+            6)
                 echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
                 sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
                 sudo rm -rf wget-log*
