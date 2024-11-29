@@ -158,10 +158,10 @@ gestionar_wps() {
         echo -e "${green}1  ${white}Iniciar Ataque WPS con Bully${reset}"
         echo -e "${green}2  ${white}Iniciar Ataque WPS con Reaver${reset}"
         echo -e "${bar}"
-        echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
-        echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}5  ${white}Poner la interfaz en modo monitor${reset}"
-        echo -e "${green}6  ${white}Poner la interfaz en modo managed${reset}"
+        echo -e "${green}3  ${white}Poner la interfaz en modo monitor${reset}"
+        echo -e "${green}4  ${white}Poner la interfaz en modo managed${reset}"
+        echo -e "${green}5  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
+        echo -e "${green}6  ${white}Reactivar servicios detenidos${reset}"
         echo -e "${green}7  ${white}Verificar el estado de la interfaz${reset}"
         echo -e "${bar}"
         echo -e "${green}8 $versionSCT${reset}"
@@ -184,20 +184,6 @@ gestionar_wps() {
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             3)
-                echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
-                sudo systemctl stop NetworkManager
-                sudo systemctl stop wpa_supplicant
-                echo -e "\n${info} Servicios detenidos.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            4)
-                echo -e "\n${info} Reactivando servicios...${reset}\n"
-                sudo systemctl start NetworkManager
-                sudo systemctl start wpa_supplicant
-                echo -e "\n${info} Servicios reactivados.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            5)
                 echo -e "\n${info} Activando modo monitor...${reset}\n"
                 sudo ip link set wlan0 down
                 sudo iw dev wlan0 interface add wlan0mon type monitor
@@ -207,13 +193,27 @@ gestionar_wps() {
                 echo -e "\n${info} Servicios reactivados.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            6)
+            4)
                 echo -e "\n${info} Reactivando modo managed...${reset}\n"
                 sudo ip link set wlan0mon down
                 sudo iw dev wlan0mon del
                 sudo ip link set wlan0 up
                 iw dev
                 nmcli device status
+                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            5)
+                echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+                sudo systemctl stop NetworkManager
+                sudo systemctl stop wpa_supplicant
+                echo -e "\n${info} Servicios detenidos.${reset}"
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            6)
+                echo -e "\n${info} Reactivando servicios...${reset}\n"
+                sudo systemctl start NetworkManager
+                sudo systemctl start wpa_supplicant
                 echo -e "\n${info} Servicios reactivados.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
