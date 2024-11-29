@@ -174,13 +174,13 @@ gestionar_wps() {
             1)
                 echo -e "\n${info} Iniciando ataque WPS con Bully...${reset}\n"
                 # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
-                sudo wifite -v -i wlan0mon -p 60 --random-mac --wps --wps-only --bully --ignore-locks --daemon
+                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --bully --ignore-locks --daemon
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             2)
                 echo -e "\n${info} Iniciando ataque WPS con Reaver...${reset}\n"
                 # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
-                sudo wifite -v -i wlan0mon -p 60 --random-mac --wps --wps-only --reaver --ignore-locks --daemon
+                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --reaver --ignore-locks --daemon
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             3)
