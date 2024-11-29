@@ -56,6 +56,7 @@ bar="${yellow}----------------------------------------------${reset}"
     exit 0
 }
 
+# Script para auditoría de redes Wi-Fi utilizando Wifite
 # menú de interfaz de usuario
 user_interface_menu() {
 
@@ -136,15 +137,32 @@ gestionar_wps() {
         # Mostrar banner
         fun_banner
 
+        # Obtener información dinámica
+        obtener_info() {
+          # Detectar la interfaz en modo Monitor
+          interfaz=$(iwconfig 2>/dev/null | grep -i "Mode:Monitor" | awk '{print $1}')
+          [ -z "$interfaz" ] && interfaz="managed"
+        
+          # Detectar el modo
+          if [ "$interfaz" != "managed" ]; then
+            modo="Monitor"
+          else
+            modo="managed"
+          fi
+        }
+        obtener_info
+        
+        echo -e "\n${white}Interfaz: ${green}${interfaz} ${white}Modo: ${green}${modo} ${reset}"
+
         echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
         echo -e "${green}1  ${white}Iniciar Ataque WPS con Bully${reset}"
         echo -e "${green}2  ${white}Iniciar Ataque WPS con Reaver${reset}"
         echo -e "${bar}"
         echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
         echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}5  ${white}Activando modo monitor${reset}"
-        echo -e "${green}6  ${white}Reactivando modo managed${reset}"
-        echo -e "${green}7  ${white}Verificar el estado del modo monitor${reset}"
+        echo -e "${green}5  ${white}Poner la interfaz en modo monitor${reset}"
+        echo -e "${green}6  ${white}Poner la interfaz en modo managed${reset}"
+        echo -e "${green}7  ${white}Verificar el estado de la interfaz${reset}"
         echo -e "${bar}"
         echo -e "${green}8 $versionSCT${reset}"
         echo -e "${bar}"
@@ -200,7 +218,7 @@ gestionar_wps() {
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             7)
-                echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
+                echo -e "\n${info} Verificando el estado de la interfaz...${reset}\n"
                 sudo iwconfig
                 echo -e "\n${info} Verificación completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
@@ -292,7 +310,8 @@ instalar_drivers() {
       fun_banner
 
         echo -e "\n${cyan}Selecciona el driver que deseas instalar:${reset}\n"
-        echo -e "${green}1  ${white}Instalar build-essential, dkms y headers${reset}"
+        echo -e "${green}1  ${white}Instalar build-essential, dkms y headers (Necesario para los drivers)${reset}"
+        echo -e "${bar}"
         echo -e "${green}2  ${white}Instalar realtek-rtl8188eus-dkms${reset}"
         echo -e "${green}3  ${white}Instalar realtek-rtl8814au-dkms${reset}"
         echo -e "${green}4  ${white}Instalar realtek-rtl8723cs-dkms${reset}"
@@ -367,114 +386,56 @@ instalar_drivers() {
     done
 }
 
-# Función para gestionar servicios y verificar el modo monitor
-gestionar_servicios_interferentes() {
-    while true; do
-
-        # Mostrar banner
-        fun_banner
-
-        echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
-        echo -e "${green}1  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
-        echo -e "${green}2  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}3  ${white}Activando modo monitor${reset}"
-        echo -e "${green}4  ${white}Reactivando modo managed${reset}"
-        echo -e "${green}5  ${white}Verificar el estado del modo monitor${reset}"
-        echo -e "${bar}"
-        echo -e "${green}6 $versionSCT${reset}"
-        echo -e "${bar}"
-        echo -e "${green}0  ${white}Volver al menú principal${reset}"
-        echo -e "\n${barra}"
-        echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
-
-        case $option in
-            1)
-                echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
-                sudo systemctl stop NetworkManager
-                sudo systemctl stop wpa_supplicant
-                echo -e "\n${info} Servicios detenidos.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            2)
-                echo -e "\n${info} Reactivando servicios...${reset}\n"
-                sudo systemctl start NetworkManager
-                sudo systemctl start wpa_supplicant
-                echo -e "\n${info} Servicios reactivados.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            3)
-                echo -e "\n${info} Activando modo monitor...${reset}\n"
-                sudo ip link set wlan0 down
-                sudo iw dev wlan0 interface add wlan0mon type monitor
-                sudo ip link set wlan0mon up
-                iw dev
-                nmcli device status
-                echo -e "\n${info} Servicios reactivados.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            4)
-                echo -e "\n${info} Reactivando modo managed...${reset}\n"
-                sudo ip link set wlan0mon down
-                sudo iw dev wlan0mon del
-                sudo ip link set wlan0 up
-                iw dev
-                nmcli device status
-                echo -e "\n${info} Servicios reactivados.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            5)
-                echo -e "\n${info} Verificando el estado del modo monitor...${reset}\n"
-                sudo iwconfig
-                echo -e "\n${info} Verificación completada.${reset}"
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            6)
-                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
-                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
-                sudo rm -rf wget-log*
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            0)
-                return
-                ;;
-            *)
-                echo -e "\n${error} ${red}Opción no válida, por favor intente de nuevo.${reset}"
-                sleep 1
-                ;;
-        esac
-    done
-}
-
 while true $x != "ok"
 do
 
 # Mostrar banner
 fun_banner
 
-# Script para auditoría de redes Wi-Fi utilizando Wifite
+# Obtener información dinámica
+obtener_info() {
+  # Detectar la interfaz en modo Monitor
+  interfaz=$(iwconfig 2>/dev/null | grep -i "Mode:Monitor" | awk '{print $1}')
+  [ -z "$interfaz" ] && interfaz="managed"
+
+  # Detectar el modo
+  if [ "$interfaz" != "managed" ]; then
+    modo="Monitor"
+  else
+    modo="managed"
+  fi
+}
+obtener_info
+
+echo -e "\n${white}Interfaz: ${green}${interfaz} ${white}Modo: ${green}${modo} ${reset}"
+
 echo -e "\n${cyan}Selecciona el tipo de ataque:${reset}\n"
-echo -e "${green}1  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
-echo -e "${green}2  ${white}Ataques a Redes WPS${reset}"
-echo -e "${green}3  ${white}Capturar PMKID (WPA/WPA2)${reset}"
-echo -e "${green}4  ${white}Ejecutar Ataques WEP${reset}"
-echo -e "${green}5  ${white}Capturar Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}1  ${white}Poner la interfaz en modo monitor${reset}"
+echo -e "${green}2  ${white}Poner la interfaz en modo managed${reset}"
+echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
+echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
+echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
 echo -e "${bar}"
-echo -e "${green}6  ${white}Crackear Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}6  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
+echo -e "${green}7  ${white}Ataques a Redes WPS${reset}"
+echo -e "${green}8  ${white}Capturar PMKID (WPA/WPA2)${reset}"
+echo -e "${green}9  ${white}Ejecutar Ataques WEP${reset}"
+echo -e "${green}10 ${white}Capturar Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}7  ${indicator} Verificar Handshakes Existentes${reset}"
-echo -e "${green}8  ${indicator} Verificar Handshakes Crackeados${reset}"
+echo -e "${green}11 ${white}Crackear Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}9  ${white}Ayuda y Manual de Usuario${reset}"
+echo -e "${green}12 ${indicator} Verificar Handshakes Existentes${reset}"
+echo -e "${green}13 ${indicator} Verificar Handshakes Crackeados${reset}"
 echo -e "${bar}"
-echo -e "${green}10 ${white}Instalar Wifite y Herramientas Necesarias${reset}"
-echo -e "${green}11 ${white}Crear Diccionario Personalizado${reset}"
-echo -e "${green}12 ${white}Instalar Controladores de Red${reset}"
+echo -e "${green}14 ${white}Ayuda y Manual de Usuario${reset}"
 echo -e "${bar}"
-echo -e "${green}13 ${white}Gestionar Servicios que Interfieren${reset}"
+echo -e "${green}15 ${white}Instalar Wifite y Herramientas Necesarias${reset}"
+echo -e "${green}16 ${white}Crear Diccionario Personalizado${reset}"
+echo -e "${green}17 ${white}Instalar Controladores de Red (drivers)${reset}"
 echo -e "${bar}"
-echo -e "${green}14 ${white}Información del Sistema y de la Red${reset}"
+echo -e "${green}18 ${white}Información del Sistema y de la Red${reset}"
 echo -e "${bar}"
-echo -e "${green}15 $versionSCT${reset}"
+echo -e "${green}19 $versionSCT${reset}"
 echo -e "${bar}"
 echo -e "${green}0  ${white}Salir${reset}"
 echo -e "\n${barra}"
@@ -482,80 +443,116 @@ echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read x
 
 case $x in
   1)
+    echo -e "\n${info} Activando modo monitor...${reset}\n"
+    sudo ip link set wlan0 down
+    sudo iw dev wlan0 interface add wlan0mon type monitor
+    sudo ip link set wlan0mon up
+    iw dev
+    nmcli device status
+    echo -e "\n${info} Servicios habilitado.${reset}"
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+  2)
+    echo -e "\n${info} Reactivando modo managed...${reset}\n"
+    sudo ip link set wlan0mon down
+    sudo iw dev wlan0mon del
+    sudo ip link set wlan0 up
+    iw dev
+    nmcli device status
+    echo -e "\n${info} Servicios habilitado.${reset}"
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+  3)
+    echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+    sudo systemctl stop NetworkManager
+    sudo systemctl stop wpa_supplicant
+    echo -e "\n${info} Servicios detenidos.${reset}"
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+  4)
+    echo -e "\n${info} Reactivando servicios...${reset}\n"
+    sudo systemctl start NetworkManager
+    sudo systemctl start wpa_supplicant
+    echo -e "\n${info} Servicios reactivados.${reset}"
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+  5)
+    echo -e "\n${info} Verificando el estado de la interfaz...${reset}\n"
+    sudo iwconfig
+    echo -e "\n${info} Verificación completada.${reset}"
+    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+    ;;
+
+  6)
     echo -e "\n${process} ${cyan}Ejecutar Wifite (Modo Predeterminado)...${reset}"
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  2)
+  7)
     echo -e "\n${process} ${cyan}Ejecutando ataques WPS...${reset}"
     gestionar_wps
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  3)
+  8)
     echo -e "\n${process} ${cyan}Capturando PMKID (WPA/WPA2)...${reset}"
     crear_diccionario
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --pmkid --skip-crack --pmkid-timeout 60 --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  4)
+  9)
     echo -e "\n${process} ${cyan}Ejecutando Ataques WEP...${reset}"
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --wep --require-fakeauth --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  5)
+  10)
     echo -e "\n${process} ${cyan}Capturando Handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
     sudo wifite --ignore-locks --keep-ivs --random-mac -v --wpa --no-pmkid --skip-crack --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  6)
+  11)
     echo -e "\n${process} ${cyan}Crackear Handshakes (WPA/WPA2)...${reset}"
     crear_diccionario
     sudo wifite --crack --dict /usr/share/wordlists/defaultWordList.txt --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  7)
+  12)
     echo -e "\n${process} ${cyan}Verificar Handshakes Existentes...${reset}"
     sudo wifite --check --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  8)
+  13)
     echo -e "\n${process} ${cyan}Verificar Handshakes Crackeados...${reset}"
     sudo wifite --cracked --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  9)
+  14)
     echo -e "\n${process} ${cyan}Ayuda y Manual de Usuario...${reset}"
     sudo /opt/Wifite-Utility/Install/wifite_help_ES.sh 
     echo -e "\nPara más información, consulta el siguiente enlace: ${cyan}https://github.com/kimocoder/wifite2${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  10)
+  15)
     echo -e "\n${process} ${cyan}Instalar Wifite y Herramientas Necesarias...${reset}"
     instalar_wifite_y_herramientas
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
-  11)
+  16)
     echo -e "\n${process} ${cyan}Crear Diccionario Personalizado...${reset}"
     crear_diccionario
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
-  12)
+  17)
     echo -e "\n${process} ${cyan}Instalar drivers de Red...${reset}"
     instalar_drivers
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
-  13)
-    echo -e "\n${process} ${cyan}Gestionar Servicios que Interfieren...${reset}"
-    gestionar_servicios_interferentes
-    echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-    ;;
-  14) 
+  18) 
     echo -e "\n${process} ${cyan}Información del Sistema y de la Red...${reset}"
     data_system 
     echo -ne "\n${bold}${red}Presiona ENTER ${yellow}para volver al ${green}MENÚ!${reset}"; read
     ;;
-  15)
+  19)
     echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
     sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
     sudo rm -rf wget-log*
