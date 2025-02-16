@@ -174,7 +174,6 @@ gestionar_wps() {
         echo -e "${bar}"
         echo -e "${green}3  ${white}Detener servicios que interfieren${reset}" # NetworkManager y wpa_supplicant
         echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}" # NetworkManager y wpa_supplicant
-        echo -e "${bar}"
         echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
         echo -e "${bar}"
         echo -e "${green}6  ${white}Iniciar Ataque WPS con Bully${reset}"
@@ -326,8 +325,6 @@ instalar_drivers() {
         echo -e "${green}5  ${white}Instalar realtek-rtl88xxau-dkms${reset}"
         echo -e "${green}6  ${white}Instalar realtek-rtl8188fu-dkms${reset}"
         echo -e "${bar}"
-        echo -e "${green}7 $versionSCT${reset}"
-        echo -e "${bar}"
         echo -e "${green}0  ${white}Volver al menú principal${reset}"
         echo -e "\n${barra}"
         echo -ne "\n${bold}${yellow} Elige una opción:${white} >> "; read option
@@ -377,12 +374,6 @@ instalar_drivers() {
                 echo -e "\n${info} Instalación completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
                 ;;
-            7)
-                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
-                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
-                sudo rm -rf wget-log*
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
             0)
                 return
                 ;;
@@ -431,10 +422,10 @@ echo -e "${green}8  ${white}Capturar PMKID (WPA/WPA2)${reset}"
 echo -e "${green}9  ${white}Ejecutar Ataques WEP${reset}"
 echo -e "${green}10 ${white}Capturar Handshakes (WPA/WPA2)${reset}"
 echo -e "${bar}"
-echo -e "${green}11 ${white}Crackear Handshakes (WPA/WPA2)${reset}"
+echo -e "${green}11 ${white}Menú de descifrado (WPA/WPA2) offline${reset}"
 echo -e "${bar}"
 echo -e "${green}12 ${indicator} Verificar Handshakes Existentes${reset}"
-echo -e "${green}13 ${indicator} Verificar Handshakes Crackeados${reset}"
+echo -e "${green}13 ${indicator} Verificar Handshakes descifrados${reset}"
 echo -e "${bar}"
 echo -e "${green}14 ${white}Ayuda y Manual de Usuario${reset}"
 echo -e "${bar}"
@@ -505,7 +496,7 @@ case $x in
   8)
     echo -e "\n${process} ${cyan}Capturando PMKID (WPA/WPA2)...${reset}"
     crear_diccionario
-    sudo wifite --ignore-locks --keep-ivs --random-mac -v --pmkid --skip-crack --pmkid-timeout 60 --daemon
+    sudo wifite --ignore-locks --keep-ivs --random-mac -v --pmkid --skip-crack --daemon
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver a ${green}MENU!${reset}"; read
     ;;
   9)
