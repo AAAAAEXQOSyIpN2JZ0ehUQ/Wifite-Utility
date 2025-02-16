@@ -47,7 +47,7 @@ sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utilit
 
 ## :computer: Instalación en una Línea
 ```bash
-sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
+sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash && sudo rm -rf wget-log*
 ```
 
 ## :rocket: Modo de Uso
@@ -97,6 +97,7 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 |------------------|---------------------|-------------------------------------------|
 | :file_folder:    | Documentos          | Carpeta para documentos en general        |
 | :file_folder:    | Imágenes            | Carpeta para imágenes del proyecto        |
+| :file_folder:    | images              | Modificaciones e imágenes del proyecto    |
 | :file_folder:    | Install             | Carpeta para scripts de instalación       |
 | :page_facing_up: | .gitattributes      | Archivo para configuración de Git         |
 | :page_facing_up: | LICENSE             | Archivo de licencia del proyecto          |
