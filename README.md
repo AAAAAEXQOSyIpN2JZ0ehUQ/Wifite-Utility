@@ -28,8 +28,9 @@ ls -ltha
 ```bash
 cd
 echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > gwifite
-sudo chmod +x gwifite
-sudo mv gwifite /usr/local/bin/
+echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > xwifite
+sudo chmod +x gwifite xwifite
+sudo mv gwifite xwifite /usr/local/bin/
 cd
 ```
 
