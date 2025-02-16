@@ -27,9 +27,9 @@ ls -ltha
 ## :key: Acceso Directo
 ```bash
 cd
-echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > wifiteutility
-sudo chmod +x wifiteutility
-sudo mv wifiteutility /usr/local/bin/
+echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > gwifite
+sudo chmod +x gwifite
+sudo mv gwifite /usr/local/bin/
 cd
 ```
 
@@ -52,10 +52,10 @@ sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utilit
 
 ## :rocket: Modo de Uso
 
-Ejecute el script simplemente ejecuta el siguiente comando `wifiteutility`  en tu terminal y presiona Enter.
+Ejecute el script simplemente ejecuta el siguiente comando `gwifite`  en tu terminal y presiona Enter.
 
 ```bash
-wifiteutility
+gwifite
 ```
 
 ## :star2: Características 
@@ -103,7 +103,6 @@ Puedes ajustar los comandos y configuraciones del script según tus necesidades 
 | :book:           | README.md           | Archivo de documentación principal        |
 | :page_facing_up: | Wifite-Utility.sh   | Script principal de utilidad Wifite       |
 | :package:        | install.sh          | Script de instalación automatizada        |
-| :page_facing_up: | wifite_help_ES.sh   | Archivo de ayuda en español para Wifite   |
 
 ## :star2: Contribuciones
 
