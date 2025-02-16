@@ -8,9 +8,9 @@ sudo chmod +x Wifite-Utility/Install/*
 cd Wifite-Utility
 ls -ltha
 cd
-echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > wifiteutility
-sudo chmod +x wifiteutility
-sudo mv wifiteutility /usr/local/bin/
+echo "cd /opt/Wifite-Utility && sudo ./Wifite-Utility.sh" > gwifite
+sudo chmod +x gwifite
+sudo mv gwifite /usr/local/bin/
 cd
 sudo apt-get -y update
 sudo apt-get install -y wifite
