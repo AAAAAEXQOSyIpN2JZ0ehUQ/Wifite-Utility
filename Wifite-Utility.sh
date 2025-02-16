@@ -37,22 +37,22 @@ bg_magenta="\033[0;45m"   # Fondo Magenta
 bg_cyan="\033[0;46m"      # Fondo Cian
 bg_white="\033[0;47m"     # Fondo Blanco
 
-# Iconos v3
-checkmark="${white}[${green}+${white}]${green}"
-error="${white}[${red}-${white}]${red}"
-info="${white}[${yellow}*${white}]${yellow}"
-unknown="${white}[${blue}!${white}]${blue}"
-process="${white}[${magenta}>>${white}]${magenta}"
-indicator="${red}==>${cyan}"
+# Iconos v1 (adaptados con los de Wifite)
+checkmark="${white}[${green}+${white}]${reset}"       # Acción exitosa o algo encontrado
+error="${white}[${red}-${white}]${reset}"             # Error o acción fallida
+info="${white}[${yellow}*${white}]${reset}"           # nformación o proceso en curso
+warning="${yellow}[${red}!${yellow}]${reset}"         # Advertencia o estado desconocido
+loading="${white}[${magenta}~${white}]${reset}"       # Indicador de proceso en ejecución
+indicator="${red}>${reset}"                           # Indicador general
 
 # Barra de separación
 barra="${blue}|--------------------------------------------|${reset}"
 bar="${yellow}----------------------------------------------${reset}"
 
-# Comprobación de permisos de root
+# Comprobación de permisos de root v1
 [[ "$(whoami)" != "root" ]] && {
-    echo -e "\n${yellow}[${red}Error${yellow}] ${white}- ${yellow}Necesitas ejecutar esto como administrador (${red}root${yellow})${reset}"
-    echo -e "\n${green} sudo $0 ${reset}"
+    echo -e "\n${error} ${yellow}Necesitas ejecutar este script como administrador (${red}root${yellow})${reset}."
+    echo -e "\n${info} ${green}Intenta: sudo $0${reset}"
     exit 0
 }
 
@@ -86,85 +86,99 @@ else
     versionSCT="${red}${txt02} ${cyan}$v1${reset}"
 fi
 
-# Función para crear el diccionario
+# Función para crear el diccionario de contraseñas
 crear_diccionario() {
-    # Ruta del archivo de salida donde se almacenará el diccionario final
+    # Ruta del archivo de salida
     local output_file="/usr/share/wordlists/defaultWordList.txt"
-
+    
     # Verificar si el diccionario ya existe para evitar sobrescribirlo
-    if [[ ! -f "$output_file" ]]; then
-        echo -e "\n${info} Creando diccionario.....${reset}\n"
-
-        # Descomprimir el archivo rockyou.txt.gz si aún no ha sido descomprimido
-        sudo apt install -y wordlists
-        if [[ ! -f "/usr/share/wordlists/rockyou.txt" ]]; then
-            sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
-        fi
-
-        # Combinar varias listas de palabras en un solo archivo temporal
-        cat /usr/share/set/src/fasttrack/wordlist.txt \
-            /usr/share/john/password.lst \
-            /usr/share/nmap/nselib/data/passwords.lst \
-            /usr/share/wordlists/rockyou.txt \
-            /usr/share/sqlmap/data/txt/wordlist.txt \
-            /usr/share/dict/wordlist-probable.txt > diccionario_combinado.txt
-
-        # Ordenar las palabras en el archivo combinado y eliminar duplicados
-        sort diccionario_combinado.txt | uniq > diccionario_sin_duplicados.txt
-
-        # Filtrar las palabras con 8 caracteres o más y guardarlas en el archivo final
-        grep -E '\b\w{8,}\b' diccionario_sin_duplicados.txt > "$output_file"
-
-        # Asignar permisos de ejecución al diccionario final (aunque no es estrictamente necesario)
-        sudo chmod +x "$output_file"
-        
-        # Eliminar los archivos temporales utilizados en el proceso
-        sudo rm -rf diccionario_combinado.txt diccionario_sin_duplicados.txt
-
-        # Contar y mostrar el número total de palabras en el diccionario final
-        wc -l "$output_file"
-
-        echo -e "\n${info} Diccionario creado en ${output_file}${reset}\n"
-    else
-        # Si el diccionario ya existe, se muestra un mensaje de advertencia
+    if [[ -f "$output_file" ]]; then
         echo -e "\n${error} El archivo ${output_file} ya existe.${reset}\n"
+        return 1
     fi
+
+    echo -e "\n${info} Creando diccionario...${reset}\n"
+
+    # Instalar wordlists si no está instalado
+    if ! dpkg -s wordlists &>/dev/null; then
+        echo -e "\n${info} Instalando wordlists...${reset}"
+        sudo apt install -y wordlists
+    fi
+
+    # Verificar si rockyou.txt está disponible, si no, descomprimirlo
+    local rockyou="/usr/share/wordlists/rockyou.txt"
+    if [[ ! -f "$rockyou" ]]; then
+        echo -e "\n${info} Descomprimiendo rockyou.txt...${reset}"
+        sudo gzip -d /usr/share/wordlists/rockyou.txt.gz 2>/dev/null
+    fi
+
+    # Archivos fuente para el diccionario
+    local fuentes=(
+        "/usr/share/set/src/fasttrack/wordlist.txt"
+        "/usr/share/john/password.lst"
+        "/usr/share/nmap/nselib/data/passwords.lst"
+        "$rockyou"
+        "/usr/share/sqlmap/data/txt/wordlist.txt"
+        "/usr/share/dict/wordlist-probable.txt"
+    )
+
+    # Verificar que los archivos fuente existen antes de combinarlos
+    local archivos_validos=()
+    for archivo in "${fuentes[@]}"; do
+        [[ -f "$archivo" ]] && archivos_validos+=("$archivo")
+    done
+
+    if [[ ${#archivos_validos[@]} -eq 0 ]]; then
+        echo -e "\n${error} No se encontraron listas de palabras disponibles.${reset}\n"
+        return 1
+    fi
+
+    # Combinar, ordenar y eliminar duplicados
+    cat "${archivos_validos[@]}" | sort -u | grep -E '\b\w{8,}\b' > "$output_file"
+
+    # Asignar permisos adecuados
+    sudo chmod 644 "$output_file"
+
+    # Contar palabras en el diccionario final
+    local total=$(wc -l < "$output_file")
+    echo -e "\n${checkmark} Diccionario creado en ${output_file} (${total} palabras).${reset}\n"
+
+    return 0
 }
 
 gestionar_wps() {
     while true; do
-
         # Mostrar banner
         fun_banner
 
         # Obtener información dinámica
         obtener_info() {
           # Detectar la interfaz en modo Monitor
-          interfaz=$(iwconfig 2>/dev/null | grep -i "Mode:Monitor" | awk '{print $1}')
+         interfaz=$(iwconfig 2>/dev/null | grep -i "Mode:Monitor" | awk '{print $1}')
           [ -z "$interfaz" ] && interfaz="managed"
-        
-          # Detectar el modo
-          if [ "$interfaz" != "managed" ]; then
-            modo="Monitor"
+
+         # Detectar el modo
+         if [ "$interfaz" != "managed" ]; then
+           modo="Monitor"
           else
-            modo="managed"
+           modo="managed"
           fi
         }
         obtener_info
-        
+
         echo -e "\n${white}Interfaz: ${green}${interfaz} ${white}Modo: ${green}${modo} ${reset}"
 
         echo -e "\n${cyan}Selecciona la opción que deseas realizar:${reset}\n"
-        echo -e "${green}1  ${white}Iniciar Ataque WPS con Bully${reset}"
-        echo -e "${green}2  ${white}Iniciar Ataque WPS con Reaver${reset}"
+        echo -e "${green}1  ${white}Poner la interfaz en modo Monitor${reset}"
+        echo -e "${green}2  ${white}Poner la interfaz en modo Managed${reset}"
         echo -e "${bar}"
-        echo -e "${green}3  ${white}Poner la interfaz en modo monitor${reset}"
-        echo -e "${green}4  ${white}Poner la interfaz en modo managed${reset}"
-        echo -e "${green}5  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
-        echo -e "${green}6  ${white}Reactivar servicios detenidos${reset}"
-        echo -e "${green}7  ${white}Verificar el estado de la interfaz${reset}"
+        echo -e "${green}3  ${white}Detener servicios que interfieren${reset}" # NetworkManager y wpa_supplicant
+        echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}" # NetworkManager y wpa_supplicant
         echo -e "${bar}"
-        echo -e "${green}8 $versionSCT${reset}"
+        echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
+        echo -e "${bar}"
+        echo -e "${green}6  ${white}Iniciar Ataque WPS con Bully${reset}"
+        echo -e "${green}7  ${white}Iniciar Ataque WPS con Reaver (Modo Predeterminado)${reset}"
         echo -e "${bar}"
         echo -e "${green}0  ${white}Volver al menú principal${reset}"
         echo -e "\n${barra}"
@@ -172,61 +186,55 @@ gestionar_wps() {
 
         case $option in
             1)
-                echo -e "\n${info} Iniciando ataque WPS con Bully...${reset}\n"
-                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
-                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --bully --ignore-locks --daemon
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            2)
-                echo -e "\n${info} Iniciando ataque WPS con Reaver...${reset}\n"
-                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
-                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --reaver --ignore-locks --daemon
-                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
-                ;;
-            3)
                 echo -e "\n${info} Activando modo monitor...${reset}\n"
                 sudo ip link set wlan0 down
                 sudo iw dev wlan0 interface add wlan0mon type monitor
                 sudo ip link set wlan0mon up
                 iw dev
                 nmcli device status
-                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -e "\n${info} Servicios modo monitor.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            4)
+            2)
                 echo -e "\n${info} Reactivando modo managed...${reset}\n"
                 sudo ip link set wlan0mon down
                 sudo iw dev wlan0mon del
                 sudo ip link set wlan0 up
                 iw dev
                 nmcli device status
-                echo -e "\n${info} Servicios reactivados.${reset}"
+                echo -e "\n${info} Servicios modo managed.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            5)
+            3)
                 echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
                 sudo systemctl stop NetworkManager
                 sudo systemctl stop wpa_supplicant
                 echo -e "\n${info} Servicios detenidos.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            6)
-                echo -e "\n${info} Reactivando servicios...${reset}\n"
+            4)
+                echo -e "\n${info} Reactivando servicios que pueden interferir...${reset}\n"
                 sudo systemctl start NetworkManager
                 sudo systemctl start wpa_supplicant
                 echo -e "\n${info} Servicios reactivados.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
-            7)
+            5)
                 echo -e "\n${info} Verificando el estado de la interfaz...${reset}\n"
                 sudo iwconfig
                 echo -e "\n${info} Verificación completada.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             6)
-                echo -e "\n${process} ${cyan}Actualizando Script...${reset}\n"
-                sudo wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/main/install.sh -O - | sudo bash
-                sudo rm -rf wget-log*
+                echo -e "\n${info} Iniciando ataque WPS con Bully...${reset}\n"
+                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
+                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --bully --ignore-locks --daemon
+                echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
+                ;;
+            7)
+                echo -e "\n${info} Iniciando ataque WPS con Reaver...${reset}\n"
+                # sudo wifite --ignore-locks --keep-ivs -p 60 --random-mac -v --wps --daemon
+                sudo wifite -v -i wlan0mon --random-mac --wps --wps-only --reaver --ignore-locks --daemon
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             0)
@@ -409,15 +417,16 @@ obtener_info
 
 echo -e "\n${white}Interfaz: ${green}${interfaz} ${white}Modo: ${green}${modo} ${reset}"
 
-echo -e "\n${cyan}Selecciona el tipo de ataque:${reset}\n"
+echo -e "\n${cyan}Selecciona una opción del menú:${reset}\n"
 echo -e "${green}1  ${white}Poner la interfaz en modo monitor${reset}"
 echo -e "${green}2  ${white}Poner la interfaz en modo managed${reset}"
-echo -e "${green}3  ${white}Detener servicios que interfieren (NetworkManager y wpa_supplicant)${reset}"
-echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}"
+echo -e "${bar}"
+echo -e "${green}3  ${white}Detener servicios que interfieren${reset}" # NetworkManager y wpa_supplicant
+echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}" # NetworkManager y wpa_supplicant
 echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
 echo -e "${bar}"
 echo -e "${green}6  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
-echo -e "${green}7  ${white}Ataques a Redes WPS${reset}"
+echo -e "${green}7  ${white}Menú de ataques WPS${reset}"
 echo -e "${green}8  ${white}Capturar PMKID (WPA/WPA2)${reset}"
 echo -e "${green}9  ${white}Ejecutar Ataques WEP${reset}"
 echo -e "${green}10 ${white}Capturar Handshakes (WPA/WPA2)${reset}"
@@ -449,7 +458,7 @@ case $x in
     sudo ip link set wlan0mon up
     iw dev
     nmcli device status
-    echo -e "\n${info} Servicios habilitado.${reset}"
+    echo -e "\n${info} Servicios modo monitor.${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   2)
@@ -459,7 +468,7 @@ case $x in
     sudo ip link set wlan0 up
     iw dev
     nmcli device status
-    echo -e "\n${info} Servicios habilitado.${reset}"
+    echo -e "\n${info} Servicios modo managed.${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   3)
@@ -470,7 +479,7 @@ case $x in
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   4)
-    echo -e "\n${info} Reactivando servicios...${reset}\n"
+    echo -e "\n${info} Reactivando servicios que pueden interferir...${reset}\n"
     sudo systemctl start NetworkManager
     sudo systemctl start wpa_supplicant
     echo -e "\n${info} Servicios reactivados.${reset}"
