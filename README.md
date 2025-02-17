@@ -3,7 +3,7 @@
 # gWifite :octocat: 
 ## :information_source: Descripción
 
-El script **gWifite** es una herramienta todo-en-uno diseñada para auditar redes inalámbricas, funcionando como un complemento para **Wifite** y otras herramientas esenciales en auditorías de redes Wi-Fi. En lugar de reemplazar a Wifite, **gWifite** facilita su uso al proporcionar una interfaz gráfica de menú (GUI) amigable y automatizar gran parte del proceso de instalación y configuración de herramientas y drivers necesarios para realizar ataques a redes.
+El script **gWifite** es una herramienta todo-en-uno diseñada para auditar redes inalámbricas, funcionando como un complemento para **Wifite**. En lugar de reemplazar a Wifite, **gWifite** facilita su uso al proporcionar una interfaz gráfica de menú (GUI) amigable.
 
 Este script ofrece un acceso más sencillo a funciones comunes como la instalación de Wifite, la creación de diccionarios personalizados, la instalación de herramientas adicionales y la configuración de drivers específicos para adaptadores de red, todo a través de una interfaz intuitiva que simplifica la experiencia del usuario.
 
