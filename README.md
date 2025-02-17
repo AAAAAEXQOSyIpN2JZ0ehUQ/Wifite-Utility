@@ -13,8 +13,12 @@ Este script ofrece un acceso más sencillo a funciones comunes como la instalaci
 ## :computer: Instalación
 ```bash
 cd /opt
+sudo cp -r Wifite-Utility/hs /opt/hs_backup
+sudo cp Wifite-Utility/cracked.json /opt/cracked.json_backup
 sudo rm -rf Wifite-Utility
 sudo git clone https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility.git
+sudo cp -r /opt/hs_backup /opt/Wifite-Utility/hs
+sudo cp /opt/cracked.json_backup /opt/Wifite-Utility/cracked.json
 sudo chmod +x Wifite-Utility/*
 sudo chmod +x Wifite-Utility/Install/* 
 cd Wifite-Utility
