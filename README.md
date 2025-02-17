@@ -1,7 +1,7 @@
 ﻿![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/blob/main/Imagenes/Wifite-Utility.png)
 
 # gWifite :octocat: 
-**Wifite-Utility**:  
+**Wifite Utility**  
 ## :information_source: Descripción
 
 El script **gWifite** es una herramienta todo-en-uno diseñada para auditar redes inalámbricas, funcionando como un complemento para **Wifite**. En lugar de reemplazar a Wifite, **gWifite** facilita su uso al proporcionar una interfaz gráfica de menú (GUI) amigable.
