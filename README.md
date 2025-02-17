@@ -1,17 +1,13 @@
 ﻿![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/Wifite-Utility/blob/main/Imagenes/Wifite-Utility.png)
 
-# Wifite Utility :octocat: 
+# gWifite :octocat: 
 ## :information_source: Descripción
-El script Wifite Utility es una herramienta todo-en-uno diseñada para auditar 
-redes inalámbricas mediante el uso de Wifite y otras herramientas esenciales para 
-la auditoría de redes Wi-Fi. Esta utilidad automatiza gran parte del proceso de 
-instalación de herramientas y drivers necesarios para realizar ataques de redes, 
-facilitando el trabajo a pentesters y entusiastas de la seguridad.
 
-Este script proporciona una interfaz gráfica de menú (GUI) amigable para ejecutar 
-las funciones más comunes, como la instalación de Wifite, la creación de 
-diccionarios personalizados, la instalación de herramientas adicionales, y la 
-configuración de drivers específicos para adaptadores de red.
+El script **gWifite** es una herramienta todo-en-uno diseñada para auditar redes inalámbricas, funcionando como un complemento para **Wifite** y otras herramientas esenciales en auditorías de redes Wi-Fi. En lugar de reemplazar a Wifite, **gWifite** facilita su uso al proporcionar una interfaz gráfica de menú (GUI) amigable y automatizar gran parte del proceso de instalación y configuración de herramientas y drivers necesarios para realizar ataques a redes.
+
+Este script ofrece un acceso más sencillo a funciones comunes como la instalación de Wifite, la creación de diccionarios personalizados, la instalación de herramientas adicionales y la configuración de drivers específicos para adaptadores de red, todo a través de una interfaz intuitiva que simplifica la experiencia del usuario.
+
+**gWifite** está orientado a pentesters y entusiastas de la seguridad, permitiendo una rápida puesta en marcha y optimización de herramientas para auditorías de redes inalámbricas sin complicaciones.
 
 ## :computer: Instalación
 ```bash
@@ -61,27 +57,27 @@ gwifite
 
 ## :star2: Características 
 
-- **Instalación Simplificada de Wifite y Herramientas Esenciales**:  
-  - Instala o actualiza Wifite y otras herramientas importantes como hcxdumptool, libpcap, entre otras, con un solo comando.
-  
+- **Instalación Simplificada de Herramientas**:  
+  - Instala o actualiza Wifite, hcxdumptool, libpcap, Pyrit y otros componentes esenciales con un solo comando.
+
 - **Automatización de la Instalación**:  
-  - Automatiza todo el proceso de instalación de herramientas y drivers necesarios, eliminando la necesidad de configuraciones manuales. 
-  
+  - Automatiza el proceso de instalación y configuración de herramientas y drivers, eliminando la necesidad de configuraciones manuales.
+
 - **Creación de Diccionarios Personalizados**:  
-  - Genera un diccionario optimizado para ataques de fuerza bruta combinando múltiples listas de palabras y filtrando palabras de longitud mínima.
-  
+  - Genera diccionarios optimizados para ataques de fuerza bruta, combinando múltiples listas de palabras y filtrando por longitud mínima.
+
 - **Gestión de Drivers para Adaptadores Wi-Fi**:  
-  - Instala rápidamente drivers para adaptadores Wi-Fi como rtl8188eus, rtl8814au, rtl88xxau, entre otros, asegurando la compatibilidad con auditorías de redes inalámbricas.
-  - Facilita la instalación de módulos del kernel y headers necesarios para la compilación de drivers.
-  
+  - Instala drivers para adaptadores Wi-Fi como rtl8188eus, rtl8814au, rtl88xxau y más, asegurando compatibilidad con auditorías inalámbricas.
+  - Facilita la instalación de módulos del kernel y headers necesarios para compilar drivers.
+
 - **Soporte para Pyrit**:  
-  - Instala o actualiza Pyrit para realizar ataques a redes inalámbricas utilizando la aceleración por GPU, con soporte para su compilación desde el código fuente.
-  
+  - Instala o actualiza Pyrit, permitiendo realizar ataques a redes Wi-Fi con aceleración por GPU, y con soporte para su compilación desde el código fuente.
+
 - **Interfaz Gráfica Amigable**:  
-  - Incluye una GUI simple que facilita la navegación por las distintas opciones del script, con un banner personalizado para mostrar información relevante sobre las herramientas utilizadas.
+  - Incluye una GUI sencilla que facilita la navegación y muestra un banner personalizado con información relevante sobre las herramientas utilizadas.
 
 - **Automatización Total**:  
-  - El script automatiza todo el proceso, desde la instalación hasta la configuración, para que puedas empezar a auditar redes Wi-Fi sin complicaciones adicionales.
+  - El script automatiza todo el proceso, desde la instalación hasta la configuración, para comenzar a auditar redes Wi-Fi sin complicaciones adicionales.
 
 ## :hammer_and_wrench: Requisitos 
 
