@@ -174,6 +174,7 @@ gestionar_wps() {
         echo -e "${bar}"
         echo -e "${green}3  ${white}Detener servicios que interfieren${reset}" # NetworkManager y wpa_supplicant
         echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}" # NetworkManager y wpa_supplicant
+        echo -e "${bar}"
         echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
         echo -e "${bar}"
         echo -e "${green}6  ${white}Iniciar Ataque WPS con Bully${reset}"
@@ -191,7 +192,7 @@ gestionar_wps() {
                 sudo ip link set wlan0mon up
                 iw dev
                 nmcli device status
-                echo -e "\n${info} Servicios modo monitor.${reset}"
+                echo -e "\n${info} Modo monitor activado.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             2)
@@ -201,11 +202,12 @@ gestionar_wps() {
                 sudo ip link set wlan0 up
                 iw dev
                 nmcli device status
-                echo -e "\n${info} Servicios modo managed.${reset}"
+                echo -e "\n${info} Modo managed activado.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
             3)
                 echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+                sudo airmon-ng check kill
                 sudo systemctl stop NetworkManager
                 sudo systemctl stop wpa_supplicant
                 echo -e "\n${info} Servicios detenidos.${reset}"
@@ -213,8 +215,8 @@ gestionar_wps() {
                 ;;
             4)
                 echo -e "\n${info} Reactivando servicios que pueden interferir...${reset}\n"
-                sudo systemctl start NetworkManager
-                sudo systemctl start wpa_supplicant
+                sudo systemctl restart NetworkManager
+                sudo systemctl restart wpa_supplicant
                 echo -e "\n${info} Servicios reactivados.${reset}"
                 echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
                 ;;
@@ -414,6 +416,7 @@ echo -e "${green}2  ${white}Poner la interfaz en modo managed${reset}"
 echo -e "${bar}"
 echo -e "${green}3  ${white}Detener servicios que interfieren${reset}" # NetworkManager y wpa_supplicant
 echo -e "${green}4  ${white}Reactivar servicios detenidos${reset}" # NetworkManager y wpa_supplicant
+echo -e "${bar}"
 echo -e "${green}5  ${white}Verificar el estado de la interfaz${reset}"
 echo -e "${bar}"
 echo -e "${green}6  ${white}Ejecutar Wifite (Modo Predeterminado)${reset}"
@@ -449,7 +452,7 @@ case $x in
     sudo ip link set wlan0mon up
     iw dev
     nmcli device status
-    echo -e "\n${info} Servicios modo monitor.${reset}"
+    echo -e "\n${info} Modo monitor activado.${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   2)
@@ -459,11 +462,12 @@ case $x in
     sudo ip link set wlan0 up
     iw dev
     nmcli device status
-    echo -e "\n${info} Servicios modo managed.${reset}"
+    echo -e "\n${info} Modo managed activado.${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
   3)
     echo -e "\n${info} Deteniendo servicios que pueden interferir...${reset}\n"
+    sudo airmon-ng check kill
     sudo systemctl stop NetworkManager
     sudo systemctl stop wpa_supplicant
     echo -e "\n${info} Servicios detenidos.${reset}"
@@ -471,8 +475,8 @@ case $x in
     ;;
   4)
     echo -e "\n${info} Reactivando servicios que pueden interferir...${reset}\n"
-    sudo systemctl start NetworkManager
-    sudo systemctl start wpa_supplicant
+    sudo systemctl restart NetworkManager
+    sudo systemctl restart wpa_supplicant
     echo -e "\n${info} Servicios reactivados.${reset}"
     echo -ne "\n${bold}${red}ENTER ${yellow}para volver al ${green}MENU!${reset}"; read
     ;;
